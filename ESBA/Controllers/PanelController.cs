@@ -6,17 +6,12 @@ using System.Web.Mvc;
 
 namespace ESBA.Controllers
 {
-    public class AuthController : Controller
+    public class PanelController : Controller
     {
-        // GET: Auth
+        // GET: Panel
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult Login()
-        {
-            return RedirectToAction("Index","Panel");
         }
     }
 }

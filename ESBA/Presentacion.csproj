@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -134,8 +135,11 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\logo-esba.png" />
+    <Content Include="Content\now-ui-dashboard.css" />
+    <Content Include="Content\now-ui-dashboard.min.css" />
     <Content Include="Content\now-ui-kit.css" />
     <Content Include="Content\now-ui-kit.min.css" />
+    <Content Include="Content\Panel.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -148,6 +152,7 @@
     <Content Include="fonts\nucleo-outline.ttf" />
     <Content Include="fonts\nucleo-outline.woff" />
     <Content Include="fonts\nucleo-outline.woff2" />
+    <Content Include="Content\now-ui-dashboard.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -159,8 +164,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\now-ui-dashboard.js" />
+    <Content Include="Scripts\now-ui-dashboard.min.js" />
     <Content Include="Scripts\now-ui-kit.js" />
     <Content Include="Scripts\now-ui-kit.min.js" />
+    <Content Include="Scripts\plugins\bootstrap-notify.js" />
+    <Content Include="Scripts\plugins\chartjs.min.js" />
+    <Content Include="Scripts\plugins\perfect-scrollbar.jquery.min.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -180,6 +190,10 @@
     <Content Include="Views\Auth\Index.cshtml" />
     <Content Include="Views\Shared\_AuthLayout.cshtml" />
     <Content Include="Views\Auth\_ViewStart.cshtml" />
+    <Content Include="Views\Panel\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_PanelLayout.cshtml" />
+    <Content Include="Views\Panel\Index.cshtml" />
+    <Content Include="Scripts\now-ui-dashboard.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

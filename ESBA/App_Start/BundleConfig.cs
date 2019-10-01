@@ -25,10 +25,23 @@ namespace ESBA
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/plugins").Include(
+                      "~/Scripts/plugins/bootstrap-notify.js",
+                      "~/Scripts/plugins/chartjs.min.js",
+                      "~/Scripts/plugins/perfect-scrollbar.jquery.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/dashboard").Include(
+                      "~/Scripts/now-ui-dashboard.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/now-ui-kit.min.css",
                       "~/Content/Site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/panel-css").Include(
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/now-ui-dashboard.min.css",
+                      "~/Content/Panel.css"));
         }
     }
 }
