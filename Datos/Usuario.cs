@@ -11,43 +11,59 @@ namespace Datos
 {
     public class Usuario
     {
-        
+        /* Pruebas en Aplicacion de consola 
+         
+            Console.WriteLine("Su Id de usuario es: " + User.Insert_User("44444", "lucas", "barreiro", "M", "jorge 12345", "1234-5678", "asdasd@gmail.com", "312123asdads", 2));
+
+            Console.ReadKey();
+
+            Console.WriteLine(User.Delete_User(2));
+
+            Console.ReadKey();
+
+            Console.WriteLine(User.Update_User(1, "44444", "enfermera", "rafaela", "M", "jorge 12345", "1234-5678","lorenzo@gmail.com", "312123asdads", 2));
+
+            Console.ReadKey();
+
+        */
+
+
+        public Usuario() { }
 
         public static int Insert_User(string document, string name, string surname, string sexo, string address, string phone, string user_mail, string user_password, string rol_id)
         {
             try
             {
+                string msj = "";
                 int id = 0;
 
                 SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
 
-                    cn.Open();
-                    SqlCommand cmd = new SqlCommand("sp_Insert_User", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@document", document);
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@surname", surname);
-                    cmd.Parameters.AddWithValue("@sexo", sexo);
-                    cmd.Parameters.AddWithValue("@address", address);
-                    cmd.Parameters.AddWithValue("@phone", phone);
-                    cmd.Parameters.AddWithValue("@user_mail", user_mail);
-                    cmd.Parameters.AddWithValue("@user_password", user_password);
-                    cmd.Parameters.AddWithValue("@rol_id", rol_id);
-                    cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output;
-                    cmd.Parameters.Add("@user_id", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_Insert_User", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@document", document);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@surname", surname);
+                cmd.Parameters.AddWithValue("@sexo", sexo);
+                cmd.Parameters.AddWithValue("@address", address);
+                cmd.Parameters.AddWithValue("@phone", phone);
+                cmd.Parameters.AddWithValue("@user_mail", user_mail);
+                cmd.Parameters.AddWithValue("@user_password", user_password);
+                cmd.Parameters.AddWithValue("@rol_id", rol_id);
+                cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@user_id", SqlDbType.Int).Direction = ParameterDirection.Output;
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                    if (dr.Read())
-                    {
-                        id = Convert.ToInt32(cmd.Parameters["@user_id"]);
-                    }
+                cmd.ExecuteNonQuery();
 
+                id = Convert.ToInt32(cmd.Parameters["@user_id"].Value.ToString());
+                msj = Convert.ToString(cmd.Parameters["@mensaje"].Value.ToString());
                 cn.Close();
                 return id;
             }
             catch (Exception ex)
             {
-                
+
                 throw new Exception(ex.Message);
             }
         }
@@ -57,7 +73,7 @@ namespace Datos
         {
             try
             {
-                string msj="";
+                string msj = "";
 
                 SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
 
@@ -71,17 +87,15 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@sexo", sexo);
                 cmd.Parameters.AddWithValue("@address", address);
                 cmd.Parameters.AddWithValue("@phone", phone);
-                cmd.Parameters.AddWithValue("@user_mail", user_mail);
-                cmd.Parameters.AddWithValue("@user_password", user_password);
+                cmd.Parameters.AddWithValue("@mail", user_mail);
+                cmd.Parameters.AddWithValue("@password", user_password);
                 cmd.Parameters.AddWithValue("@rol_id", rol_id);
                 cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output;
 
+                cmd.ExecuteNonQuery();
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    msj = Convert.ToString(cmd.Parameters["@mensaje"].Value.ToString());
-                }
+                msj = Convert.ToString(cmd.Parameters["@mensaje"].Value.ToString());
+
 
                 cn.Close();
                 return msj;
@@ -103,17 +117,16 @@ namespace Datos
                 SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Insert_User", cn);
+                SqlCommand cmd = new SqlCommand("sp_Delete_User", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@int user_id", user_id);
+                cmd.Parameters.AddWithValue("@user_id", user_id);
                 cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output;
 
 
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    msj = Convert.ToString(cmd.Parameters["@mensaje"].Value.ToString());
-                }
+                cmd.ExecuteNonQuery();
+
+                msj = Convert.ToString(cmd.Parameters["@mensaje"].Value.ToString());
+
 
                 cn.Close();
                 return msj;

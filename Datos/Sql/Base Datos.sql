@@ -81,6 +81,10 @@ insert into users (document,name,surname,sexo,address,phone,mail,password,rol_id
 	values('64564','ramon','gomez','M','monroe 123','2312-3453','ramon@gmail.com','das',3)
 
 
+	select * from Auditoria
+	select * from users
+
+
 
 /*------------------------------V A L I D A T E   U S E R   A N D   P A S S W O R D---------------C O N F I R M A D O-------------------------------------*/
 
@@ -205,7 +209,7 @@ select @mensaje
 /*----------------------- U P D A T E   U S E R ----------------------------C O N F I R M A D O------------------------------------------------*/
 
 
-create procedure sp_Update_UserName
+create procedure sp_Update_User
 	@user_id int,
 	@document varchar (max),
 	@name varchar (max),
@@ -237,7 +241,7 @@ return
 /*
 select * from users inner join roles on roles.rol_id = users.rol_id
 declare @mensaje varchar(max)
-exec dbo.sp_Update_UserName 4,'3123123','jose vald','gomez','L','la hoja 111','321-53','adshhh@g.com','6699tt','1',@mensaje output
+exec dbo.sp_Update_User 4,'3123123','jose vald','gomez','L','la hoja 111','321-53','adshhh@g.com','6699tt','1',@mensaje output
 select @mensaje
 */
 
