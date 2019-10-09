@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    public class Usuario
+    public class Usuarios
     {
         /* Pruebas en Aplicacion de consola 
          
@@ -28,8 +28,9 @@ namespace Datos
         */
 
 
-        public Usuario() { }
+        public Usuarios() { }
 
+        
         public static int Insert_User(string document, string name, string surname, string sexo, string address, string phone, string user_mail, string user_password, string rol_id)
         {
             try
@@ -136,7 +137,75 @@ namespace Datos
 
                 throw new Exception(ex.Message);
             }
+
+
         }
+
+        public static SqlDataReader Get_User(int user_id)
+        {
+            SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
+            try
+            {
+        
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_GetUser", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@user_id", user_id);
+                return cmd.ExecuteReader();
+
+           
+  
+            }
+            catch (Exception ex)
+            {
+                
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+               cn.Close();
+            }
+        }
+
+
+        public static string Validate_User(string user_mail, string user_password)
+        {
+            try
+            {
+                string msj = "";
+
+                SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
+
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_Update_User", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@user_id", user_id);
+                cmd.Parameters.AddWithValue("@document", document);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@surname", surname);
+                cmd.Parameters.AddWithValue("@sexo", sexo);
+                cmd.Parameters.AddWithValue("@address", address);
+                cmd.Parameters.AddWithValue("@phone", phone);
+                cmd.Parameters.AddWithValue("@mail", user_mail);
+                cmd.Parameters.AddWithValue("@password", user_password);
+                cmd.Parameters.AddWithValue("@rol_id", rol_id);
+                cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+
+                msj = Convert.ToString(cmd.Parameters["@mensaje"].Value.ToString());
+
+
+                cn.Close();
+                return msj;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
 
     }
 }
