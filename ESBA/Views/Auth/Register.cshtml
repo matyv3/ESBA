@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+    <div class="container">
+        <div class="col-md-4 ml-auto mr-auto">
+            <div class="card card-login card-plain">
+                <form class="form" method="post" action="~/Auth/Register">
+                    <div class="card-header text-center">
+                        <div class="logo-container">
+                            <img src="~/Content/images/logo-esba.png" alt="ESBA" style="width: 25%;">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group no-border input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                </span>
+                            </div>
+                            <input type="text" name="name" required class="form-control" placeholder="Nombre">
+                        </div>
+                        <div class="input-group no-border input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                </span>
+                            </div>
+                            <input type="text" name="surname" required class="form-control" placeholder="Apellido">
+                        </div>
+                        <div class="input-group no-border input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                </span>
+                            </div>
+                            <input type="number" name="dni" required class="form-control" placeholder="DNI">
+                        </div>
+                        <div class="input-group no-border input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="now-ui-icons ui-1_email-85"></i>
+                                </span>
+                            </div>
+                            <input type="email" name="email" required class="form-control" placeholder="Email">
+                        </div>
+                        <div class="input-group no-border input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="now-ui-icons tech_mobile"></i>
+                                </span>
+                            </div>
+                            <input type="number" name="phone" required class="form-control" placeholder="Teléfono">
+                        </div>
+                        <div class="input-group no-border input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="now-ui-icons objects_key-25"></i>
+                                </span>
+                            </div>
+                            <input type="password" name="password" required class="form-control" placeholder="Contraseña">
+                        </div>
+                        <div class="input-group no-border input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                </span>
+                            </div>
+                            <input type="password" required name="password_confirm" class="form-control" placeholder="Confirmar Contraseña">
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $('form').submit(function () {
+            if ($('input[name="password"]').val() != $('input[name="password_confirm"]').val()) {
+                alert('Las contraseñas no coinciden')
+                return false
+            }
+            return true
+        })
+    </script>

@@ -20,10 +20,9 @@ namespace ESBA
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                        "~/Scripts/now-ui-kit.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                        "~/Scripts/now-ui-kit.min.js",
+                        "~/Scripts/bootstrap.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/plugins").Include(
                       "~/Scripts/plugins/bootstrap-notify.js",

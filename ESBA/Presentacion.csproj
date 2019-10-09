@@ -194,6 +194,7 @@
     <Content Include="Views\Shared\_PanelLayout.cshtml" />
     <Content Include="Views\Panel\Index.cshtml" />
     <Content Include="Scripts\now-ui-dashboard.js.map" />
+    <Content Include="Views\Auth\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

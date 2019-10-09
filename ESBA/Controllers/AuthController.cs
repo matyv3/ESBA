@@ -18,5 +18,10 @@ namespace ESBA.Controllers
         {
             return RedirectToAction("Index","Panel");
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
     }
 }
