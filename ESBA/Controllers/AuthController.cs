@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,6 +23,12 @@ namespace ESBA.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+
+        public ActionResult GuardarUsuario(Usuario user)
+        {
+
+            return RedirectToAction("Index", "Auth");
         }
     }
 }

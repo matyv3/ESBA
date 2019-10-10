@@ -1,6 +1,7 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,20 @@ namespace Negocio
     {
         #region Propiedades
         public int? user_id { get; set; }
+        [Required(ErrorMessage = "El DNI es requerido")]
         public string document { get; set; }
+        [Required(ErrorMessage = "El nombre es requerido")]
         public string name { get; set; }
+        [Required(ErrorMessage = "El apellido es requerido")]
         public string surname { get; set; }
         public string sexo { get; set; }
+        [Required(ErrorMessage = "La dirección es requerida")]
         public string Address { get; set; }
+        [Required(ErrorMessage = "El teléfono es requerido")]
         public string Phone { get; set; }
+        [Required(ErrorMessage = "El email es requerido")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "La contraseña es requerida")]
         public string Password{ get; set; }
         public string Rol { get; set; }
         #endregion
