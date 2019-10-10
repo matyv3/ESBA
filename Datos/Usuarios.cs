@@ -69,7 +69,6 @@ namespace Datos
             }
         }
 
-
         public static string Update_User(int user_id, string document, string name, string surname, string sexo, string address, string phone, string user_mail, string user_password, string rol_id)
         {
             try
@@ -107,7 +106,6 @@ namespace Datos
                 throw new Exception(ex.Message);
             }
         }
-
 
         public static string Delete_User(int user_id)
         {
@@ -167,37 +165,25 @@ namespace Datos
             }
         }
 
-
-        public static string Validate_User(string user_mail, string user_password)
+        public static int Validate_User(string user_mail, string user_password)
         {
             try
             {
-                string msj = "";
+
 
                 SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
+
                 SqlCommand cmd = new SqlCommand("sp_Update_User", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@user_id", user_id);
-                cmd.Parameters.AddWithValue("@document", document);
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@surname", surname);
-                cmd.Parameters.AddWithValue("@sexo", sexo);
-                cmd.Parameters.AddWithValue("@address", address);
-                cmd.Parameters.AddWithValue("@phone", phone);
                 cmd.Parameters.AddWithValue("@mail", user_mail);
                 cmd.Parameters.AddWithValue("@password", user_password);
-                cmd.Parameters.AddWithValue("@rol_id", rol_id);
-                cmd.Parameters.Add("@mensaje", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output;
-
+                cmd.Parameters.Add("@user_id", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 
-                msj = Convert.ToString(cmd.Parameters["@mensaje"].Value.ToString());
-
-
                 cn.Close();
-                return msj;
+                return Convert.ToInt32(cmd.Parameters["@user_id"].Value.ToString());
             }
             catch (Exception ex)
             {

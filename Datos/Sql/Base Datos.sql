@@ -90,10 +90,10 @@ insert into users (document,name,surname,sexo,address,phone,mail,password,rol_id
 
 
 create procedure sp_Validate_User
+
 	@user_mail varchar(max),
 	@user_password varchar(max),
-	@user_id int output,
-	@mensaje varchar(max) output
+	@user_id int output
 as
 begin
 		declare @busqueda varchar(max)
@@ -102,8 +102,6 @@ begin
 		if (@busqueda is null)
 			begin
 				set @user_id = 0
-				set	@mensaje = 'El Usuario es Incorrecto'
-
 			end
 		else
 			begin
@@ -111,12 +109,14 @@ begin
 	
 				if (@user_id is null)
 				begin
-					set @user_id = 0
-					set	@mensaje = 'La contraseña es Incorrecta'
+					set @user_id = -1
 				end
+
+
 			end
 end
 return
+
 
 /*
 declare @mensaje varchar(max)
