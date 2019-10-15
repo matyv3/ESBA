@@ -1,4 +1,5 @@
-﻿
+﻿@model Negocio.Usuario
+
 @{
     ViewBag.Title = "Login";
 }
@@ -6,7 +7,8 @@
 <div class="container">
     <div class="col-md-4 ml-auto mr-auto">
         <div class="card card-login card-plain">
-            <form class="form" method="post" action="~/Auth/Login">
+            @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+            {
                 <div class="card-header text-center">
                     <div class="logo-container">
                         <img src="~/Content/images/logo-esba.png" alt="ESBA" style="width: 25%;">
@@ -19,7 +21,7 @@
                                 <i class="now-ui-icons users_circle-08"></i>
                             </span>
                         </div>
-                        <input type="email" class="form-control" placeholder="Email">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
                     </div>
                     <div class="input-group no-border input-lg">
                         <div class="input-group-prepend">
@@ -27,7 +29,7 @@
                                 <i class="now-ui-icons text_caps-small"></i>
                             </span>
                         </div>
-                        <input type="password" placeholder="Contraseña" class="form-control" />
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Contraseña" } )
                     </div>
                 </div>
                 <div class="card-footer text-center">
@@ -38,7 +40,7 @@
                         </h6>
                     </div>
                 </div>
-            </form>
+            }
         </div>
     </div>
 </div>
