@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
@@ -30,7 +30,7 @@ namespace Negocio
         public string Rol { get; set; }
         #endregion
 
-        public bool Validar(string email, string contrasena)
+        public static bool Validar(string email, string contrasena)
         {
             // valida contra la capa de datos y devuelve true o false si existe
 
@@ -54,10 +54,28 @@ namespace Negocio
                 usuario.Email = dr["mail"].ToString();
                 usuario.Password = dr["password"].ToString();
                 usuario.Rol = dr["description"].ToString();
-
             }
 
             return usuario;
+        }
+
+        public bool Grabar()
+        {
+            // validar datos
+            // validar que ese usuario no exista ya en la base
+            if (user_id.HasValue) { 
+                // actualizar
+            } 
+            else
+            {
+                // crear
+            }
+            return true;
+        }
+
+        public bool Eliminar(int idUsuario)
+        {
+            return true;
         }
     }
 }

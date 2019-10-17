@@ -17,7 +17,18 @@ namespace ESBA.Controllers
 
         public ActionResult Login()
         {
-            return RedirectToAction("Index","Panel");
+            string email = Request.Form["email"];
+            string password = Request.Form["password"];
+            if (Usuario.Validar(email, password))
+            {
+                // guardar usuario en sesion
+                Session["fafa"] = "fafafa";
+                return RedirectToAction("Index","Panel");
+            }
+            else
+            {
+                return RedirectToAction("Index","Auth");
+            }
         }
 
         public ActionResult Register()
