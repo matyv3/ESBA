@@ -30,11 +30,17 @@ namespace Negocio
         public string Rol { get; set; }
         #endregion
 
-        public static bool Validar(string email, string contrasena)
+        public static int Validar(string email, string contrasena)
         {
-            // valida contra la capa de datos y devuelve true o false si existe
-
-            return true;
+            string encriptada = Encriptar(contrasena);
+            try
+            {
+                return Datos.Usuarios.Validate_User(email, encriptada);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
         public static Usuario Obtener(int id)
@@ -63,12 +69,24 @@ namespace Negocio
         {
             // validar datos
             // validar que ese usuario no exista ya en la base
-            if (user_id.HasValue) { 
-                // actualizar
+            if (user_id.HasValue) {
+                // actualizar                
             } 
             else
             {
                 // crear
+                Datos.Usuarios.Insert_User(
+                    this.document,
+                    this.name,
+                    this.surname,
+                    this.sexo,
+                    this.Address,
+                    this.Phone,
+                    this.Email,
+                    Encriptar(this.Password),
+                    this.Rol
+                );
+                
             }
             return true;
         }
@@ -76,6 +94,18 @@ namespace Negocio
         public bool Eliminar(int idUsuario)
         {
             return true;
+        }
+
+        private static string Encriptar(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        private static string Desencriptar(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
     }
 }

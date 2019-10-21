@@ -19,10 +19,12 @@ namespace ESBA.Controllers
         {
             string email = Request.Form["email"];
             string password = Request.Form["password"];
-            if (Usuario.Validar(email, password))
+            int user_id = Usuario.Validar(email, password);
+            if (user_id != 0)
             {
                 // guardar usuario en sesion
-                Session["fafa"] = "fafafa";
+                Usuario user = Usuario.Obtener(user_id);
+                Session["user"] = user;
                 return RedirectToAction("Index","Panel");
             }
             else
@@ -36,9 +38,18 @@ namespace ESBA.Controllers
             return View();
         }
 
-        public ActionResult GuardarUsuario(Usuario user)
+        public ActionResult GuardarUsuario()
         {
-
+            Usuario user = new Usuario();
+            user.name = Request.Form["name"];
+            user.surname = Request.Form["surname"];
+            user.Email = Request.Form["Email"];
+            user.Password = Request.Form["Password"];
+            user.Phone = Request.Form["Phone"];
+            user.sexo = Request.Form["sexo"];
+            user.Address = Request.Form["Address"];
+            user.Rol = "User"; // todo: 
+            user.Grabar();
             return RedirectToAction("Index", "Auth");
         }
     }
