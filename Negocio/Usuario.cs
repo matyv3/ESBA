@@ -50,7 +50,7 @@ namespace Negocio
             SqlDataReader dr = Datos.Usuarios.Get_User(id);
             while (dr.Read())
             {
-                usuario.user_id = Convert.ToInt32 (dr["id"]);
+                usuario.user_id = Convert.ToInt32 (dr["user_id"]);
                 usuario.document = dr["document"].ToString();
                 usuario.name = dr["name"].ToString();
                 usuario.surname = dr["surname"].ToString();

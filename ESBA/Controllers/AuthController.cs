@@ -20,7 +20,7 @@ namespace ESBA.Controllers
             string email = Request.Form["email"];
             string password = Request.Form["password"];
             int user_id = Usuario.Validar(email, password);
-            if (user_id != 0)
+            if (user_id != 0 && user_id != -1)
             {
                 // guardar usuario en sesion
                 Usuario user = Usuario.Obtener(user_id);
@@ -48,7 +48,8 @@ namespace ESBA.Controllers
             user.Phone = Request.Form["Phone"];
             user.sexo = Request.Form["sexo"];
             user.Address = Request.Form["Address"];
-            user.Rol = "User"; // todo: 
+            user.document = Request.Form["document"];
+            user.Rol = "1"; // todo: 
             user.Grabar();
             return RedirectToAction("Index", "Auth");
         }

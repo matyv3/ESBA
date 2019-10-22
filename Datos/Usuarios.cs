@@ -158,11 +158,9 @@ namespace Datos
             {
                 
                 throw new Exception(ex.Message);
+                cn.Close();
             }
-            finally
-            {
-               cn.Close();
-            }
+
         }
 
         public static int Validate_User(string user_mail, string user_password)
@@ -175,10 +173,10 @@ namespace Datos
 
                 cn.Open();
 
-                SqlCommand cmd = new SqlCommand("sp_Update_User", cn);
+                SqlCommand cmd = new SqlCommand("sp_Validate_User", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@mail", user_mail);
-                cmd.Parameters.AddWithValue("@password", user_password);
+                cmd.Parameters.AddWithValue("@user_mail", user_mail);
+                cmd.Parameters.AddWithValue("@user_password", user_password);
                 cmd.Parameters.Add("@user_id", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 

@@ -43,10 +43,26 @@
                         <div class="input-group no-border input-lg">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                </span>
+                            </div>
+                            @Html.EditorFor(model => model.sexo, new { htmlAttributes = new { @class = "form-control", placeholder = "Sexo" } })
+                        </div>
+                        <div class="input-group no-border input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
                                     <i class="now-ui-icons ui-1_email-85"></i>
                                 </span>
                             </div>
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder  = "Email"  } })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                        </div>
+                        <div class="input-group no-border input-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="now-ui-icons ui-1_email-85"></i>
+                                </span>
+                            </div>
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Direccion" } })
                         </div>
                         <div class="input-group no-border input-lg">
                             <div class="input-group-prepend">
@@ -54,7 +70,7 @@
                                     <i class="now-ui-icons tech_mobile"></i>
                                 </span>
                             </div>
-                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", placeholder  = "Teléfono" } })
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "Teléfono" } })
                         </div>
                         <div class="input-group no-border input-lg">
                             <div class="input-group-prepend">
@@ -62,7 +78,7 @@
                                     <i class="now-ui-icons objects_key-25"></i>
                                 </span>
                             </div>
-                            @Html.PasswordFor(model => model.Password,  new {@class="form-control", placeholder="Contraseña"})
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Contraseña" })
                         </div>
                         <div class="input-group no-border input-lg">
                             <div class="input-group-prepend">
@@ -82,7 +98,7 @@
     </div>
 
 
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         $('form').submit(function () {
             if ($('input[name="password"]').val() != $('input[name="password_confirm"]').val()) {
                 alert('Las contraseñas no coinciden')
@@ -90,4 +106,4 @@
             }
             return true
         })
-    </script>
+    </script>*@
