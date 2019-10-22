@@ -17,11 +17,12 @@ namespace ESBA.Controllers
         /// <param name="filterContext"></param>
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            base.OnActionExecuted(filterContext);
-            if(Session["usuario"] == null)
+            if(Session["user"] == null)
             {
-                RedirectToAction("Index","Auth");
+                filterContext.Result = RedirectToAction("Index","Auth");
+                return; 
             }
+            base.OnActionExecuted(filterContext);
         }
 
 
