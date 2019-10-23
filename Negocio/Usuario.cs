@@ -72,8 +72,7 @@ namespace Negocio
             // validar datos
             // validar que ese usuario no exista ya en la base
             if (user_id.HasValue) {
-                // actualizar 
-                
+                // actualizar                 
             } 
             else
             {
@@ -92,6 +91,12 @@ namespace Negocio
                 
             }
             return true;
+        }
+
+        public bool Existe()
+        {
+            int result = Datos.Usuarios.Validate_User(this.Email, "");
+            return result != 0;
         }
 
         public bool Eliminar(int idUsuario)

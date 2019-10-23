@@ -59,6 +59,10 @@ namespace ESBA.Controllers
 
         public ActionResult Register()
         {
+            if (TempData["error"] != null)
+            {
+                ViewBag.error = TempData["error"].ToString();
+            }
             if (TempData["success"] != null)
             {
                 ViewBag.success = TempData["success"].ToString();
@@ -78,9 +82,17 @@ namespace ESBA.Controllers
             user.Address = Request.Form["Address"];
             user.document = Request.Form["document"];
             user.Rol = "1"; // todo: 
-            user.Grabar();
-            TempData["success"] = "Registrado correctamente. Escriba email y contraseña para ingresar";
-            return RedirectToAction("Index", "Auth");
+            if (!user.Existe())
+            {
+                user.Grabar();
+                TempData["success"] = "Registrado correctamente. Escriba email y contraseña para ingresar";
+                return RedirectToAction("Index", "Auth");
+            }
+            else
+            {
+                TempData["error"] = "Email ya registrado";
+                return RedirectToAction("Register", "Auth");
+            }
         }
     }
 }
