@@ -97,7 +97,7 @@
                                     <i class="now-ui-icons ui-1_lock-circle-open"></i>
                                 </span>
                             </div>
-                            <input type="password" required name="password_confirm" class="form-control" placeholder="Confirmar Contraseña">
+                            @Html.PasswordFor(model => model.PasswordConfirm, new { @class = "form-control", placeholder = "Confirmar Contraseña" })
                         </div>
                     </div>
                     @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
@@ -107,6 +107,8 @@
                     @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                     @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                     @Html.ValidationMessageFor(model => model.sexo, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.PasswordConfirm, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
 
                     <div class="card-footer text-center">
                         <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Registrarse</button>
@@ -121,14 +123,3 @@
             </div>
         </div>
     </div>
-
-
-    @*<script type="text/javascript">
-        $('form').submit(function () {
-            if ($('input[name="password"]').val() != $('input[name="password_confirm"]').val()) {
-                alert('Las contraseñas no coinciden')
-                return false
-            }
-            return true
-        })
-    </script>*@

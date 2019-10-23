@@ -27,8 +27,12 @@ namespace Negocio
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "El email es requerido")]
         public string Email { get; set; }
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "La contraseña es requerida")]
         public string Password{ get; set; }
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Las contraseñas no coinciden")]
+        public string PasswordConfirm { get; set; }
         public string Rol { get; set; }
         #endregion
 
