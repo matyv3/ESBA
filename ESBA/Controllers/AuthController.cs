@@ -84,9 +84,16 @@ namespace ESBA.Controllers
             user.Rol = "1"; // todo: 
             if (!user.Existe())
             {
-                user.Grabar();
-                TempData["success"] = "Registrado correctamente. Escriba email y contraseña para ingresar";
-                return RedirectToAction("Index", "Auth");
+                if (user.Grabar(out string error))
+                {
+                    TempData["success"] = "Ingrese usuario y contraseña para loguearse";
+                    return RedirectToAction("Index", "Auth");
+                }
+                else
+                {
+                    TempData["error"] = "Error al grabar: " + error;
+                    return RedirectToAction("Index", "Auth");
+                }
             }
             else
             {

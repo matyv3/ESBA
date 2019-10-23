@@ -71,17 +71,16 @@ namespace Negocio
             return usuario;
         }
 
-        public bool Grabar()
+        public bool Grabar( out string error)
         {
+
+            error = "";
             // validar datos
             // validar que ese usuario no exista ya en la base
             if (user_id.HasValue) {
-                // actualizar                 
-            } 
-            else
-            {
-                // crear
-                Datos.Usuarios.Insert_User(
+                // actualizar   
+                Datos.Usuarios.Update_User(
+                    this.user_id.Value,
                     this.document,
                     this.name,
                     this.surname,
@@ -91,10 +90,34 @@ namespace Negocio
                     this.Email,
                     Encriptar(this.Password),
                     this.Rol
-                );
+                    );
+                return true;
+            } 
+            else
+            {
+                // crear
+                if (validar( out error))
+                { 
+                    Datos.Usuarios.Insert_User(
+                                this.document,
+                                this.name,
+                                this.surname,
+                                this.sexo,
+                                this.Address,
+                                this.Phone,
+                                this.Email,
+                                Encriptar(this.Password),
+                                this.Rol
+                            );
+                    return true;
+                }
+                else
+                {
+
+                    return false;
+                }
                 
             }
-            return true;
         }
 
         public bool Existe()
@@ -118,6 +141,23 @@ namespace Negocio
         {
             var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
+        private bool validar( out string error)
+        {
+            error = "";
+
+            if (string.IsNullOrEmpty(Email))
+                error += "el email se encuentra vacio" + Environment.NewLine;
+
+            if (string.IsNullOrEmpty(Password))
+                error += "el pass se encuentra vacio" + Environment.NewLine;
+
+            if (string.IsNullOrEmpty(error))
+                return true;
+            else
+                return false;
+                    
         }
     }
 }
