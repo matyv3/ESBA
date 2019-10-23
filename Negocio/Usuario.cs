@@ -21,8 +21,10 @@ namespace Negocio
         public string sexo { get; set; }
         [Required(ErrorMessage = "La dirección es requerida")]
         public string Address { get; set; }
+        [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "El teléfono es requerido")]
         public string Phone { get; set; }
+        [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "El email es requerido")]
         public string Email { get; set; }
         [Required(ErrorMessage = "La contraseña es requerida")]

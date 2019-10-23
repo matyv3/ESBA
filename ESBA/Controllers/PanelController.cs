@@ -17,16 +17,21 @@ namespace ESBA.Controllers
         /// <param name="filterContext"></param>
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            if(Session["user"] == null)
+            if (Session["user"] == null)
             {
-                filterContext.Result = RedirectToAction("Index","Auth");
-                return; 
+                filterContext.Result = RedirectToAction("Index", "Auth");
+                return;
             }
             base.OnActionExecuted(filterContext);
         }
 
 
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Perfil()
         {
             return View();
         }

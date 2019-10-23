@@ -38,7 +38,7 @@ namespace Datos
                 string msj = "";
                 int id = 0;
 
-                SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
+                SqlConnection cn = new SqlConnection("server= DESKTOP-MC00E31 ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
                 SqlCommand cmd = new SqlCommand("sp_Insert_User", cn);
@@ -75,7 +75,7 @@ namespace Datos
             {
                 string msj = "";
 
-                SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
+                SqlConnection cn = new SqlConnection("server= DESKTOP-MC00E31 ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
                 SqlCommand cmd = new SqlCommand("sp_Update_User", cn);
@@ -113,7 +113,7 @@ namespace Datos
             {
                 string msj = "";
 
-                SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
+                SqlConnection cn = new SqlConnection("server= DESKTOP-MC00E31 ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
                 SqlCommand cmd = new SqlCommand("sp_Delete_User", cn);
@@ -141,7 +141,7 @@ namespace Datos
 
         public static SqlDataReader Get_User(int user_id)
         {
-            SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
+            SqlConnection cn = new SqlConnection("server= DESKTOP-MC00E31 ; database = ESBA_WEB ; integrated security = true");
             try
             {
         
@@ -169,7 +169,7 @@ namespace Datos
             {
 
 
-                SqlConnection cn = new SqlConnection("server=. ; database = ESBA_WEB ; integrated security = true");
+                SqlConnection cn = new SqlConnection("server= DESKTOP-MC00E31 ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
 

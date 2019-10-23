@@ -195,6 +195,7 @@
     <Content Include="Views\Panel\Index.cshtml" />
     <Content Include="Scripts\now-ui-dashboard.js.map" />
     <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Panel\Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

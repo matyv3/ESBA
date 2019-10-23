@@ -89,6 +89,13 @@
                             <input type="password" required name="password_confirm" class="form-control" placeholder="Confirmar Contraseña">
                         </div>
                     </div>
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.surname, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.document, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.sexo, "", new { @class = "text-danger" })
                     <div class="card-footer text-center">
                         <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Registrarse</button>
                     </div>

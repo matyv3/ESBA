@@ -53,5 +53,11 @@ namespace ESBA.Controllers
             user.Grabar();
             return RedirectToAction("Index", "Auth");
         }
+
+        public ActionResult Logout()
+        {
+            Session["user"] = null;
+            return RedirectToAction("Index", "Auth");
+        }
     }
 }
