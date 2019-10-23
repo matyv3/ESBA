@@ -27,6 +27,14 @@ namespace ESBA.Controllers
         }
         public ActionResult Index()
         {
+            if (TempData["error"] != null)
+            {
+                ViewBag.error = TempData["error"].ToString();
+            }
+            if (TempData["success"] != null)
+            {
+                ViewBag.success = TempData["success"].ToString();
+            }
             return View();
         }
 
@@ -44,12 +52,17 @@ namespace ESBA.Controllers
             }
             else
             {
+                TempData["error"] = "Datos incorrectos";
                 return RedirectToAction("Index","Auth");
             }
         }
 
         public ActionResult Register()
         {
+            if (TempData["success"] != null)
+            {
+                ViewBag.success = TempData["success"].ToString();
+            }
             return View();
         }
 
@@ -66,6 +79,7 @@ namespace ESBA.Controllers
             user.document = Request.Form["document"];
             user.Rol = "1"; // todo: 
             user.Grabar();
+            TempData["success"] = "Registrado correctamente. Escriba email y contraseña para ingresar";
             return RedirectToAction("Index", "Auth");
         }
     }

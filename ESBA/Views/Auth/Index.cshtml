@@ -7,13 +7,25 @@
 <div class="container">
     <div class="col-md-4 ml-auto mr-auto">
         <div class="card card-login card-plain">
+            <div class="card-header text-center">
+                <div class="logo-container">
+                    <img src="~/Content/images/logo-esba.png" alt="ESBA" style="width: 25%;">
+                </div>
+            </div>
+            @if (!string.IsNullOrEmpty(ViewBag.error))
+            {
+                <div class="alert alert-danger" role="alert" style="margin-top: 15px">
+                    @ViewBag.error
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(ViewBag.success))
+            {
+                <div class="alert alert-success" role="alert" style="margin-top: 15px">
+                    @ViewBag.success
+                </div>
+            }
             @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
             {
-                <div class="card-header text-center">
-                    <div class="logo-container">
-                        <img src="~/Content/images/logo-esba.png" alt="ESBA" style="width: 25%;">
-                    </div>
-                </div>
                 <div class="card-body">
                     <div class="input-group no-border input-lg">
                         <div class="input-group-prepend">
@@ -36,7 +48,7 @@
                     <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Ingresar</button>
                     <div class="pull-left mt-2">
                         <h6>
-                            <a href="#" class="link">Olvidé mi contraseña</a>
+                            <a href="~/Auth/Register" class="link">Registrarse</a>
                         </h6>
                     </div>
                 </div>

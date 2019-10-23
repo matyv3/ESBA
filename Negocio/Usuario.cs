@@ -72,7 +72,8 @@ namespace Negocio
             // validar datos
             // validar que ese usuario no exista ya en la base
             if (user_id.HasValue) {
-                // actualizar                
+                // actualizar 
+                
             } 
             else
             {
