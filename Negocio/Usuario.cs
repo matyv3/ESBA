@@ -61,7 +61,7 @@ namespace Negocio
                 usuario.Phone = dr["phone"].ToString();
                 usuario.Email = dr["mail"].ToString();
                 usuario.Password = dr["password"].ToString();
-                usuario.Rol = dr["description"].ToString();
+                usuario.Rol = dr["descripcion"].ToString();
             }
 
             return usuario;

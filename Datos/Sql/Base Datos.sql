@@ -245,6 +245,20 @@ exec dbo.sp_Update_User 4,'3123123','jose vald','gomez','L','la hoja 111','321-5
 select @mensaje
 */
 
+/*----------------------- G E T  U S E R ----------------------------C O N F I R M A D O------------------------------------------------*/
+
+create procedure sp_Get_User
+	@user_id int
+as
+begin
+	
+	select u.*, r.descripcion from users u
+	inner join roles r on r.rol_id = u.rol_id
+	where u.user_id = @user_id
+	
+end
+return
+
 
 
 /*---------------------------------T R I G G E R   D E L E T E D   U S E R------------------------------C O N F I R M A D O-----------------------------------------*/
@@ -347,3 +361,6 @@ for update
 		end catch
 
 	end
+
+
+

@@ -10,6 +10,21 @@ namespace ESBA.Controllers
     public class AuthController : Controller
     {
         // GET: Auth
+        
+        /// <summary>
+        /// Esto se ejecuta antes que cualquier metodo
+        /// sirve para validar si tiene permisos
+        /// </summary>
+        /// <param name="filterContext"></param>
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            if (Session["user_id"] != null)
+            {
+                filterContext.Result = RedirectToAction("Index", "Panel");
+                return;
+            }
+            base.OnActionExecuted(filterContext);
+        }
         public ActionResult Index()
         {
             return View();
@@ -24,7 +39,7 @@ namespace ESBA.Controllers
             {
                 // guardar usuario en sesion
                 Usuario user = Usuario.Obtener(user_id);
-                Session["user"] = user;
+                Session["user_id"] = user.user_id;
                 return RedirectToAction("Index","Panel");
             }
             else
@@ -51,12 +66,6 @@ namespace ESBA.Controllers
             user.document = Request.Form["document"];
             user.Rol = "1"; // todo: 
             user.Grabar();
-            return RedirectToAction("Index", "Auth");
-        }
-
-        public ActionResult Logout()
-        {
-            Session["user"] = null;
             return RedirectToAction("Index", "Auth");
         }
     }
