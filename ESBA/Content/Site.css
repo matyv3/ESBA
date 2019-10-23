@@ -1,3 +1,7 @@
 ﻿body {
     padding: 0px;
 }
+
+.card-login .input-group-text, .card-login .form-control, .card-login .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.8)
+}
