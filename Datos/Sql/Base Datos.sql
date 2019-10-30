@@ -247,7 +247,7 @@ select @mensaje
 
 /*----------------------- G E T  U S E R ----------------------------C O N F I R M A D O------------------------------------------------*/
 
-create procedure sp_Get_User
+create procedure sp_GetUser
 	@user_id int
 as
 begin

@@ -34,11 +34,12 @@ namespace Negocio
         [Compare("Password", ErrorMessage = "Las contraseñas no coinciden")]
         public string PasswordConfirm { get; set; }
         public string Rol { get; set; }
+        public int rol_id { get; set; }
         #endregion
 
         public static int Validar(string email, string contrasena)
         {
-            string encriptada = Encriptar(contrasena);
+            string encriptada = Seguridad.Encriptar(contrasena);
             try
             {
                 return Datos.Usuarios.Validate_User(email, encriptada);
@@ -66,6 +67,7 @@ namespace Negocio
                 usuario.Email = dr["mail"].ToString();
                 usuario.Password = dr["password"].ToString();
                 usuario.Rol = dr["descripcion"].ToString();
+                usuario.rol_id = Convert.ToInt32(dr["rol_id"]);
             }
 
             return usuario;
@@ -88,8 +90,8 @@ namespace Negocio
                     this.Address,
                     this.Phone,
                     this.Email,
-                    Encriptar(this.Password),
-                    this.Rol
+                    Seguridad.Encriptar(this.Password),
+                    this.rol_id.ToString()
                     );
                 return true;
             } 
@@ -106,8 +108,8 @@ namespace Negocio
                                 this.Address,
                                 this.Phone,
                                 this.Email,
-                                Encriptar(this.Password),
-                                this.Rol
+                                Seguridad.Encriptar(this.Password),
+                                this.rol_id.ToString()
                             );
                     return true;
                 }
@@ -131,17 +133,7 @@ namespace Negocio
             return true;
         }
 
-        private static string Encriptar(string plainText)
-        {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
-        }
-
-        private static string Desencriptar(string base64EncodedData)
-        {
-            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-        }
+        
 
         private bool validar( out string error)
         {

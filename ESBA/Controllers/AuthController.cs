@@ -70,21 +70,13 @@ namespace ESBA.Controllers
             return View();
         }
 
-        public ActionResult GuardarUsuario()
+        public ActionResult GuardarUsuario(Usuario usuario)
         {
-            Usuario user = new Usuario();
-            user.name = Request.Form["name"];
-            user.surname = Request.Form["surname"];
-            user.Email = Request.Form["Email"];
-            user.Password = Request.Form["Password"];
-            user.Phone = Request.Form["Phone"];
-            user.sexo = Request.Form["sexo"];
-            user.Address = Request.Form["Address"];
-            user.document = Request.Form["document"];
-            user.Rol = "1"; // todo: 
-            if (!user.Existe())
+            usuario.rol_id = 1; // Alumno por default
+             
+            if (!usuario.Existe())
             {
-                if (user.Grabar(out string error))
+                if (usuario.Grabar(out string error))
                 {
                     TempData["success"] = "Ingrese usuario y contraseña para loguearse";
                     return RedirectToAction("Index", "Auth");

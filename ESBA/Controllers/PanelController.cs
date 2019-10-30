@@ -35,13 +35,29 @@ namespace ESBA.Controllers
         public ActionResult Perfil()
         {
             Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
-
+            if (TempData["error"] != null)
+            {
+                ViewBag.error = TempData["error"].ToString();
+            }
+            if (TempData["success"] != null)
+            {
+                ViewBag.success = TempData["success"].ToString();
+            }
             return View(user);
         }
 
-        public ActionResult ActualizarUsuario()
+        public ActionResult ActualizarUsuario(Usuario user)
         {
-            return RedirectToAction("Index", "Panel");
+            if (user.Grabar(out string error))
+            {
+                TempData["success"] = "Perfil actualizado";
+                return RedirectToAction("Perfil", "Panel");
+            }
+            else
+            {
+                TempData["error"] = "Error al grabar: " + error;
+                return RedirectToAction("Perfil", "Panel");
+            }
         }
 
         public ActionResult Logout()
