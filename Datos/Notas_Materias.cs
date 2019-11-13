@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    class Notas
+    class Notas_Materias
     {
-        public Notas() { }
+
+        public Notas_Materias() { }
 
 
         /// <summary>
@@ -20,7 +21,7 @@ namespace Datos
         /// <param name="materia_name"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve ID de Nota insertada o 0 en caso de error </returns>
-        public static int Insert_Notas(int nota_valor)
+        public static int Insert_Nota_Materia(int Nota_id, int Materia_id)
         {
             try
             {
@@ -29,11 +30,10 @@ namespace Datos
                 SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Insert_Notas", cn);
+                SqlCommand cmd = new SqlCommand("sp_Insert_Nota_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@nota_valor", nota_valor);
-
-
+                cmd.Parameters.AddWithValue("@Nota_id", Nota_id);
+                cmd.Parameters.AddWithValue("@Materia_id", Materia_id);
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
@@ -50,6 +50,7 @@ namespace Datos
         }
 
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,7 +58,7 @@ namespace Datos
         /// <param name="nombre"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve 1 si fue exitoso o 0 en caso de error </returns>
-        public static int Update_Notas(int Nota_id, int nota_valor)
+        public static int Update_Nota_Materia(int Nota_Materia_id, int Nota_id, int Materia_id)
         {
             try
             {
@@ -66,10 +67,11 @@ namespace Datos
                 SqlConnection cn = new SqlConnection("server= .; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Update_Notas", cn);
+                SqlCommand cmd = new SqlCommand("sp_Update_Nota_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Nota_Materia_id", Nota_Materia_id);
                 cmd.Parameters.AddWithValue("@Nota_id", Nota_id);
-                cmd.Parameters.AddWithValue("@nota_valor", nota_valor);
+                cmd.Parameters.AddWithValue("@Materia_id", Materia_id);
 
 
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -89,12 +91,14 @@ namespace Datos
             }
         }
 
+
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="materia_id"></param>
         /// <returns> Devuelve 1 si fue exitoso o 0 en caso de error </returns>
-        public static int Delete_Notas(int Nota_id)
+        public static int Delete_Nota_Materia(int Nota_Materia_id)
         {
             try
             {
@@ -103,9 +107,9 @@ namespace Datos
                 SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Delete_Notas", cn);
+                SqlCommand cmd = new SqlCommand("sp_Delete_Nota_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Nota_id", Nota_id);
+                cmd.Parameters.AddWithValue("@Nota_Materia_id", Nota_Materia_id);
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
@@ -125,21 +129,23 @@ namespace Datos
 
         }
 
+
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="Materia_id"></param>
         /// <returns> Devuelve un SQL Reader con los Datos de Materia </returns>
-        public static SqlDataReader Get_Notas(int Nota_id)
+        public static SqlDataReader Get_Nota_Materia(int Nota_Materia_id)
         {
             SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
             try
             {
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Get_Notas", cn);
+                SqlCommand cmd = new SqlCommand("sp_Get_Nota_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Nota_id", Nota_id);
+                cmd.Parameters.AddWithValue("@Nota_Materia_id", Nota_Materia_id);
                 return cmd.ExecuteReader();
 
 
@@ -154,7 +160,8 @@ namespace Datos
 
         }
 
-        public static int Validate_Notas(int nota_valor)
+
+        public static int Validate_Nota_Materia(int Nota_id, int Materia_id)
         {
             try
             {
@@ -164,9 +171,10 @@ namespace Datos
 
                 cn.Open();
 
-                SqlCommand cmd = new SqlCommand("sp_Validate_Notas", cn);
+                SqlCommand cmd = new SqlCommand("sp_Validate_Nota_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@nota_valor", nota_valor);
+                cmd.Parameters.AddWithValue("@Nota_id", Nota_id);
+                cmd.Parameters.AddWithValue("@Materia_id", Materia_id);
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 
@@ -181,6 +189,8 @@ namespace Datos
                 throw new Exception(ex.Message);
             }
         }
+
+
 
     }
 }
