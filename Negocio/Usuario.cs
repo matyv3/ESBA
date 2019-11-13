@@ -73,6 +73,29 @@ namespace Negocio
             return usuario;
         }
 
+        /*public static Usuario Obtener(int id)
+        {
+            Usuario usuario = new Usuario();
+
+            SqlDataReader dr = Datos.Usuarios.Get_User(id);
+            while (dr.Read())
+            {
+                usuario.user_id = Convert.ToInt32(dr["user_id"]);
+                usuario.document = dr["document"].ToString();
+                usuario.name = dr["name"].ToString();
+                usuario.surname = dr["surname"].ToString();
+                usuario.sexo = dr["sexo"].ToString();
+                usuario.Address = dr["address"].ToString();
+                usuario.Phone = dr["phone"].ToString();
+                usuario.Email = dr["mail"].ToString();
+                usuario.Password = dr["password"].ToString();
+                usuario.Rol = dr["descripcion"].ToString();
+                usuario.rol_id = Convert.ToInt32(dr["rol_id"]);
+            }
+
+            return usuario;
+        }*/
+
         public bool Grabar( out string error)
         {
 
@@ -132,8 +155,6 @@ namespace Negocio
         {
             return true;
         }
-
-        
 
         private bool validar( out string error)
         {
