@@ -52,6 +52,11 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Sql\Base Datos.sql" />
+    <Content Include="Sql\Estado_Materia.sql" />
+    <Content Include="Sql\Materia.sql" />
+    <Content Include="Sql\Notas.sql" />
+    <Content Include="Sql\Nota_Materia.sql" />
+    <Content Include="Sql\Usuario_Materia.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
