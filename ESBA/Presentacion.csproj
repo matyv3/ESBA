@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Global.asax.cs">
@@ -197,6 +198,9 @@
     <Content Include="Scripts\now-ui-dashboard.js.map" />
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Views\Panel\Perfil.cshtml" />
+    <Content Include="Views\Panel\Materias.cshtml" />
+    <Content Include="Views\Panel\Estudiantes.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,7 +29,7 @@ namespace ESBA.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Materias","Panel");
         }
 
         public ActionResult Perfil()
@@ -64,6 +64,21 @@ namespace ESBA.Controllers
         {
             Session["user_id"] = null;
             return RedirectToAction("Index", "Auth");
+        }
+
+        public ActionResult Materias()
+        {
+            return View();
+        }
+
+        public ActionResult Estudiantes()
+        {
+            Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
+            if(user.Rol != "administrativo")
+            {
+                return RedirectToAction("NotFound","Error");
+            }
+            return View();
         }
     }
 }
