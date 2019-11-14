@@ -9,29 +9,30 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    class Materias
+    class Estado_Materias
     {
-        public Materias() { }
+
+        public Estado_Materias() { }
 
         /// <summary>
         /// Insert de Materia
         /// </summary>
         /// <param name="materia_name"></param>
         /// <param name="cant_modulos"></param>
-        /// <returns> Devuelve ID de materia insertada o 0 en caso de error </returns>
-        public static int Insert_Materia(string materia_name,int cant_modulos)
+        /// <returns> Devuelve ID de Nota insertada o 0 en caso de error </returns>
+        public static int Insert_Estado_Materia(string Descripcion)
         {
             try
-            { 
+            {
                 int id = 0;
 
                 SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Insert_Materia", cn);
+                SqlCommand cmd = new SqlCommand("sp_Insert_Estado_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@materia_name", materia_name);
-                cmd.Parameters.AddWithValue("@cant_modulos", cant_modulos);
+                cmd.Parameters.AddWithValue("@Descripcion", Descripcion);
+
 
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -48,6 +49,8 @@ namespace Datos
             }
         }
 
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -55,7 +58,7 @@ namespace Datos
         /// <param name="nombre"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve 1 si fue exitoso o 0 en caso de error </returns>
-        public static int Update_Materia(int Materia_id, string nombre, int cant_modulos)
+        public static int Update_Estado_Materia(int Estado_Materia_id, string Descripcion_new)
         {
             try
             {
@@ -64,11 +67,11 @@ namespace Datos
                 SqlConnection cn = new SqlConnection("server= .; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Update_Materia", cn);
+                SqlCommand cmd = new SqlCommand("sp_Update_Estado_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@materia_id", Materia_id);
-                cmd.Parameters.AddWithValue("@materia_name", nombre);
-                cmd.Parameters.AddWithValue("@cant_modulos", cant_modulos);
+                cmd.Parameters.AddWithValue("@Estado_Materia_id", Estado_Materia_id);
+                cmd.Parameters.AddWithValue("@Descripcion_new", Descripcion_new);
+
 
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -93,7 +96,7 @@ namespace Datos
         /// </summary>
         /// <param name="materia_id"></param>
         /// <returns> Devuelve 1 si fue exitoso o 0 en caso de error </returns>
-        public static int Delete_Materia(int materia_id)
+        public static int Delete_Estado_Materia(int Estado_Materia_id)
         {
             try
             {
@@ -102,9 +105,9 @@ namespace Datos
                 SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Delete_Materia", cn);
+                SqlCommand cmd = new SqlCommand("sp_Delete_Estado_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@materia_id", materia_id);
+                cmd.Parameters.AddWithValue("@Estado_Materia_id", Estado_Materia_id);
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
@@ -124,21 +127,22 @@ namespace Datos
 
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="Materia_id"></param>
         /// <returns> Devuelve un SQL Reader con los Datos de Materia </returns>
-        public static SqlDataReader Get_Materias(int Materia_id)
+        public static SqlDataReader Get_Estado_Materia(int Estado_Materia_id)
         {
             SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
             try
             {
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Get_Materias", cn);
+                SqlCommand cmd = new SqlCommand("sp_Get_Estado_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Materia_id", Materia_id);
+                cmd.Parameters.AddWithValue("@Estado_Materia_id", Estado_Materia_id);
                 return cmd.ExecuteReader();
 
 
@@ -154,12 +158,8 @@ namespace Datos
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="materia_name"></param>
-        /// <returns>  Devuelve 1 si fue exitoso o 0 en caso de error  </returns>
-        public static int Validate_Materia(string materia_name)
+
+        public static int Validate_Notas(string Descripcion)
         {
             try
             {
@@ -169,9 +169,9 @@ namespace Datos
 
                 cn.Open();
 
-                SqlCommand cmd = new SqlCommand("sp_Validate_Materia", cn);
+                SqlCommand cmd = new SqlCommand("sp_Validate_Estado_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@materia_name", materia_name);
+                cmd.Parameters.AddWithValue("@Descripcion", Descripcion);
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 
@@ -189,14 +189,14 @@ namespace Datos
 
 
 
-        public static SqlDataReader GetALL_Materia()
+        public static SqlDataReader GetALL_Estado_Materia()
         {
             SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
             try
             {
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_GetAll_Materias", cn);
+                SqlCommand cmd = new SqlCommand("sp_GetAll_Estado_Materia", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 return cmd.ExecuteReader();
 
@@ -211,7 +211,6 @@ namespace Datos
             }
 
         }
-
 
 
 

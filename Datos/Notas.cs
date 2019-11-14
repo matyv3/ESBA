@@ -20,7 +20,7 @@ namespace Datos
         /// <param name="materia_name"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve ID de Nota insertada o 0 en caso de error </returns>
-        public static int Insert_Notas(decimal nota_valor)
+        public static int Insert_Notas(int nota_valor)
         {
             try
             {
@@ -182,5 +182,30 @@ namespace Datos
             }
         }
 
+
+
+
+        public static SqlDataReader GetALL_Notas()
+        {
+            SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
+            try
+            {
+
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_GetAll_Notas", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                return cmd.ExecuteReader();
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+                cn.Close();
+            }
+
+        }
     }
 }

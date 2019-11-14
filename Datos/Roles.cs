@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    class Materias
+    class Roles
     {
-        public Materias() { }
+        public Roles() { }
+
 
         /// <summary>
         /// Insert de Materia
@@ -19,19 +20,19 @@ namespace Datos
         /// <param name="materia_name"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve ID de materia insertada o 0 en caso de error </returns>
-        public static int Insert_Materia(string materia_name,int cant_modulos)
+        public static int Insert_Roles(string descripcion)
         {
             try
-            { 
+            {
                 int id = 0;
 
                 SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Insert_Materia", cn);
+                SqlCommand cmd = new SqlCommand("sp_Insert_Roles", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@materia_name", materia_name);
-                cmd.Parameters.AddWithValue("@cant_modulos", cant_modulos);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+
 
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -55,7 +56,7 @@ namespace Datos
         /// <param name="nombre"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve 1 si fue exitoso o 0 en caso de error </returns>
-        public static int Update_Materia(int Materia_id, string nombre, int cant_modulos)
+        public static int Update_Roles(int rol_id, string descripcion)
         {
             try
             {
@@ -64,11 +65,11 @@ namespace Datos
                 SqlConnection cn = new SqlConnection("server= .; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Update_Materia", cn);
+                SqlCommand cmd = new SqlCommand("sp_Update_Roles", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@materia_id", Materia_id);
-                cmd.Parameters.AddWithValue("@materia_name", nombre);
-                cmd.Parameters.AddWithValue("@cant_modulos", cant_modulos);
+                cmd.Parameters.AddWithValue("@rol_id", rol_id);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+
 
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
@@ -93,7 +94,7 @@ namespace Datos
         /// </summary>
         /// <param name="materia_id"></param>
         /// <returns> Devuelve 1 si fue exitoso o 0 en caso de error </returns>
-        public static int Delete_Materia(int materia_id)
+        public static int Delete_Roles(int rol_id)
         {
             try
             {
@@ -102,9 +103,9 @@ namespace Datos
                 SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Delete_Materia", cn);
+                SqlCommand cmd = new SqlCommand("sp_Delete_Roles", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@materia_id", materia_id);
+                cmd.Parameters.AddWithValue("@rol_id", rol_id);
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
@@ -124,21 +125,23 @@ namespace Datos
 
         }
 
+
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="Materia_id"></param>
         /// <returns> Devuelve un SQL Reader con los Datos de Materia </returns>
-        public static SqlDataReader Get_Materias(int Materia_id)
+        public static SqlDataReader Get_Roles(int rol_id)
         {
             SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
             try
             {
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Get_Materias", cn);
+                SqlCommand cmd = new SqlCommand("sp_Get_Roles", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Materia_id", Materia_id);
+                cmd.Parameters.AddWithValue("@rol_id", rol_id);
                 return cmd.ExecuteReader();
 
 
@@ -159,7 +162,7 @@ namespace Datos
         /// </summary>
         /// <param name="materia_name"></param>
         /// <returns>  Devuelve 1 si fue exitoso o 0 en caso de error  </returns>
-        public static int Validate_Materia(string materia_name)
+        public static int Validate_Roles(string descripcion)
         {
             try
             {
@@ -169,9 +172,9 @@ namespace Datos
 
                 cn.Open();
 
-                SqlCommand cmd = new SqlCommand("sp_Validate_Materia", cn);
+                SqlCommand cmd = new SqlCommand("sp_Validate_Roles", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@materia_name", materia_name);
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 
@@ -189,14 +192,14 @@ namespace Datos
 
 
 
-        public static SqlDataReader GetALL_Materia()
+        public static SqlDataReader GetALL_Roles()
         {
             SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
             try
             {
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_GetAll_Materias", cn);
+                SqlCommand cmd = new SqlCommand("sp_GetAll_Roles", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 return cmd.ExecuteReader();
 
@@ -211,9 +214,6 @@ namespace Datos
             }
 
         }
-
-
-
 
     }
 }
