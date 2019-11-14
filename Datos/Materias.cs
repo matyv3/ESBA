@@ -189,6 +189,29 @@ namespace Datos
 
 
 
+        public static SqlDataReader GetALL_Materia()
+        {
+            SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
+            try
+            {
+
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_GetAll_Materias", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                return cmd.ExecuteReader();
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+                cn.Close();
+            }
+
+        }
+
 
 
 

@@ -45,6 +45,7 @@
     <Compile Include="Materias.cs" />
     <Compile Include="Notas.cs" />
     <Compile Include="Notas_Materias.cs" />
+    <Compile Include="Roles.cs" />
     <Compile Include="Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuarios_Materias.cs" />
@@ -56,6 +57,7 @@
     <Content Include="Sql\Materia.sql" />
     <Content Include="Sql\Notas.sql" />
     <Content Include="Sql\Nota_Materia.sql" />
+    <Content Include="Sql\Roles.sql" />
     <Content Include="Sql\Usuario_Materia.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
