@@ -63,6 +63,7 @@ namespace ESBA.Controllers
         public ActionResult Logout()
         {
             Session["user_id"] = null;
+            Session["Rol"] = null;
             return RedirectToAction("Index", "Auth");
         }
 
@@ -71,12 +72,41 @@ namespace ESBA.Controllers
             return View();
         }
 
+        public ActionResult CrearMateria()
+        {
+            return View();
+        }
+
+        public ActionResult GrabarMateria(Materia materia)
+        {
+            if (materia.Grabar())
+            {
+                TempData["success"] = "Materia guardada";
+                return RedirectToAction("Materias", "Panel");
+            }
+            else
+            {
+                TempData["error"] = "Error al grabar: ";
+                return RedirectToAction("Materias", "Panel");
+            }
+        }
+
         public ActionResult Estudiantes()
         {
             Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
             if(user.Rol != "administrativo")
             {
                 return RedirectToAction("NotFound","Error");
+            }
+            return View();
+        }
+
+        public ActionResult Profesores()
+        {
+            Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
+            if (user.Rol != "administrativo")
+            {
+                return RedirectToAction("NotFound", "Error");
             }
             return View();
         }

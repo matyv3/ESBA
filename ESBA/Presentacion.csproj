@@ -201,6 +201,8 @@
     <Content Include="Views\Panel\Materias.cshtml" />
     <Content Include="Views\Panel\Estudiantes.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Panel\Profesores.cshtml" />
+    <Content Include="Views\Panel\CrearMateria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

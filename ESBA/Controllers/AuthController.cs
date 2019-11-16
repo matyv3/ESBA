@@ -48,6 +48,7 @@ namespace ESBA.Controllers
                 // guardar usuario en sesion
                 Usuario user = Usuario.Obtener(user_id);
                 Session["user_id"] = user.user_id;
+                Session["Rol"] = user.Rol;
                 return RedirectToAction("Index","Panel");
             }
             else

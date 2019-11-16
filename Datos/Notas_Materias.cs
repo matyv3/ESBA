@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    class Notas_Materias
+    public class Notas_Materias
     {
 
         public Notas_Materias() { }

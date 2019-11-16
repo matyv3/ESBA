@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    class Usuarios_Materias
+    public class Usuarios_Materias
     {
         public Usuarios_Materias() { }
 

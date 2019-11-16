@@ -1,0 +1,49 @@
+﻿@model Negocio.Materia
+@{
+    ViewBag.Title = "CrearMateria";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="title">
+                   Crear Materia
+                </h5>
+                @if (!string.IsNullOrEmpty(ViewBag.error))
+                {
+                    <div class="alert alert-danger" role="alert" style="margin-top: 15px">
+                        @ViewBag.error
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.success))
+                {
+                    <div class="alert alert-success" role="alert" style="margin-top: 15px">
+                        @ViewBag.success
+                    </div>
+                }
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("GrabarMateria", "Panel", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label>Nombre</label>
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre Materia" } })
+                        </div>
+                        <div class="col-md-4">
+                            <label>Cantidad de Módulos</label>
+                            @Html.EditorFor(model => model.CantModulos, new { htmlAttributes = new { @class = "form-control", placeholder = "ej: 4" } })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
