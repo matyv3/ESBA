@@ -203,6 +203,8 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Panel\Profesores.cshtml" />
     <Content Include="Views\Panel\CrearMateria.cshtml" />
+    <Content Include="Views\Panel\Historial.cshtml" />
+    <Content Include="Views\Error\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

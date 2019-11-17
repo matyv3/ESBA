@@ -9,8 +9,9 @@ namespace ESBA.Controllers
     public class ErrorController : Controller
     {
         // GET: Error
-        public ActionResult NotFound()
+        public ActionResult NotFound(string prev)
         {
+            ViewBag.prev = prev;
             return View();
         }
     }

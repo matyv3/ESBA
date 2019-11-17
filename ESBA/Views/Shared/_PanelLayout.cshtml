@@ -21,16 +21,16 @@
             </div>
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="active">
-                        <a href="#">
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "materias" ? "active" : "")">
+                        <a href="~/panel/materias">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             <p>Materias</p>
                         </a>
                     </li>
                     @if (Session["Rol"].ToString() == "alumno")
                     {
-                        <li>
-                            <a href="#">
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "historial" ? "active" : "")">
+                            <a href="~/panel/historial">
                                 <i class="now-ui-icons education_paper"></i>
                                 <p>Historial académico</p>
                             </a>
@@ -38,14 +38,14 @@
                     }
                     @if (Session["Rol"].ToString() != "alumno")
                     {
-                        <li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "alumnos" ? "active" : "")">
                             <a href="~/panel/alumnos">
                                 <i class="now-ui-icons users_single-02"></i>
                                 <p>Alumnos</p>
                             </a>
                         </li>
                     }
-                    <li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "perfil" ? "active" : "")">
                         <a href="~/panel/perfil">
                             <i class="now-ui-icons users_single-02"></i>
                             <p>Perfil</p>

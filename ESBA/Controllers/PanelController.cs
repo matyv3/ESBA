@@ -79,14 +79,15 @@ namespace ESBA.Controllers
 
         public ActionResult GrabarMateria(Materia materia)
         {
-            if (materia.Grabar())
+            string error = "";
+            if (materia.Grabar(out error))
             {
                 TempData["success"] = "Materia guardada";
                 return RedirectToAction("Materias", "Panel");
             }
             else
             {
-                TempData["error"] = "Error al grabar: ";
+                TempData["error"] = "Error al grabar: " + error;
                 return RedirectToAction("Materias", "Panel");
             }
         }
@@ -108,6 +109,10 @@ namespace ESBA.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
+            return View();
+        }
+
+        public ActionResult Historial() {
             return View();
         }
     }
