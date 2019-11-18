@@ -69,7 +69,8 @@ namespace ESBA.Controllers
 
         public ActionResult Materias()
         {
-            return View();
+            List<Materia> materias = Materia.ObtenerTodas();
+            return View(materias);
         }
 
         public ActionResult CrearMateria()

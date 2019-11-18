@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,22 @@ namespace Negocio
                 }
                 
             }
+        }
+
+        public static List<Materia> ObtenerTodas()
+        {
+            List<Materia> materias = new List<Materia>();
+            SqlDataReader dr = Datos.Materias.GetALL_Materia();
+            while (dr.Read())
+            {
+                Materia materia = new Materia();
+                materia.Id = Convert.ToInt32(dr["Materia_id"]);
+                materia.Nombre = dr["nombre"].ToString();
+                materia.CantModulos = Convert.ToInt32(dr["Cant_Modulos"]);
+                materias.Add(materia);
+            }
+
+            return materias;
         }
 
         private bool validar(out string error)
