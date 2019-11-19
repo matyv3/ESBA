@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
-    public class Materia
+    class Estado_Materia
     {
+
+
         public int? Id { get; set; }
         public string Nombre { get; set; }
         public int CantModulos { get; set; }
@@ -24,7 +24,7 @@ namespace Negocio
             }
             else
             {
-                if(validar(out error))
+                if (validar(out error))
                 {
                     int result = Datos.Materias.Insert_Materia(
                         this.Nombre,
@@ -36,7 +36,7 @@ namespace Negocio
                 {
                     return false;
                 }
-                
+
             }
         }
 
@@ -55,31 +55,6 @@ namespace Negocio
 
             return materias;
         }
-
-
-        public static Materia Obtener(int id)
-        {
-            Usuario Materia = new Usuario();
-
-            SqlDataReader dr = Datos.Usuarios.Get_User(id);
-            while (dr.Read())
-            {
-                Materia.Id = Convert.ToInt32(dr["user_id"]);
-                Materia.Nombre = dr["document"].ToString();
-                Materia.CantModulos = dr["name"].ToString();
-                usuario.surname = dr["surname"].ToString();
-                usuario.sexo = dr["sexo"].ToString();
-                usuario.Address = dr["address"].ToString();
-                usuario.Phone = dr["phone"].ToString();
-                usuario.Email = dr["mail"].ToString();
-                usuario.Password = dr["password"].ToString();
-                usuario.Rol = dr["descripcion"].ToString();
-                usuario.rol_id = Convert.ToInt32(dr["rol_id"]);
-            }
-
-            return Materia;
-        }
-
 
         private bool validar(out string error)
         {

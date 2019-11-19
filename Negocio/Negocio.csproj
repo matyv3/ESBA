@@ -42,10 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Estado_Materia.cs" />
     <Compile Include="Materia.cs" />
+    <Compile Include="Nota.cs" />
+    <Compile Include="Nota_Materia.cs" />
+    <Compile Include="Rol.cs" />
     <Compile Include="Seguridad.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usuario_Materia.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Datos\Datos.csproj">
