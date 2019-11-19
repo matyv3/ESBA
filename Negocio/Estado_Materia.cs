@@ -21,15 +21,19 @@ namespace Negocio
             error = "";
             if (this.Estado_Materia_id.HasValue)
             {
+
+                int result = Convert.ToInt32(Datos.Estado_Materias.Update_Estado_Materia(this.Estado_Materia_id.Value, this.Descripcion));
+
+
                 return true;
             }
             else
             {
                 if (validar(out error))
                 {
-                    int result = Datos.Estado_Materias.Insert_Estado_Materia(
+                    int result = Convert.ToInt32(Datos.Estado_Materias.Insert_Estado_Materia(
                         this.Descripcion
-                    );
+                    ));
                     return result == 1;
                 }
                 else
@@ -108,7 +112,7 @@ namespace Negocio
         {
             error = "";
 
-            if (string.IsNullOrEmpty(Descripcion))
+            if (string.IsNullOrEmpty(this.Descripcion))
                 error += "la descripcion se encuentra vacio" + Environment.NewLine;
 
             if (string.IsNullOrEmpty(error))

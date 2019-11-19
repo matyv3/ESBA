@@ -364,3 +364,13 @@ for update
 
 
 
+	/*----------------- Get ALL -----------------------*/
+
+
+create procedure sp_GetAll_Users
+
+as
+begin
+	select * from users
+end
+return

@@ -50,7 +50,7 @@ namespace Negocio
             }
         }
 
-        /*public static Usuario Obtener(int id)
+        public static Usuario Obtener(int id)
         {
             Usuario usuario = new Usuario();
 
@@ -71,16 +71,18 @@ namespace Negocio
             }
 
             return usuario;
-        }*/
+        }
 
-        public static Usuario ObtenerUsuarios(int id)
+        public static List<Usuario> ObtenerUsuarios(int id)
         {
-            List<Usuario> usuarios = List<Usuario>;
-            Usuario usuario = new Usuario();
+            List<Usuario> usuarios = new List<Usuario>();
+            
 
-            SqlDataReader dr = Datos.Usuarios.Get_User(id);
+            SqlDataReader dr = Datos.Usuarios.GetALL_Users();
             while (dr.Read())
             {
+                Usuario usuario = new Usuario();
+
                 usuario.user_id = Convert.ToInt32(dr["user_id"]);
                 usuario.document = dr["document"].ToString();
                 usuario.name = dr["name"].ToString();
@@ -92,9 +94,11 @@ namespace Negocio
                 usuario.Password = dr["password"].ToString();
                 usuario.Rol = dr["descripcion"].ToString();
                 usuario.rol_id = Convert.ToInt32(dr["rol_id"]);
+
+                usuarios.Add(usuario);
             }
 
-            return usuario;
+            return usuarios;
         }
 
         public bool Grabar( out string error)

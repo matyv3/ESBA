@@ -20,15 +20,18 @@ namespace Negocio
             error = "";
             if (this.Nota_id.HasValue)
             {
+
+                int result = Convert.ToInt32(Datos.Notas.Update_Notas(this.Nota_id.Value, this.valor));
+
                 return true;
             }
             else
             {
                 if (validar(out error))
                 {
-                    int result = Datos.Notas.Insert_Notas(               
+                    int result = Convert.ToInt32(Datos.Notas.Insert_Notas(               
                         this.valor
-                    );
+                    ));
                     return result == 1;
                 }
                 else

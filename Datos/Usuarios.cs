@@ -189,6 +189,28 @@ namespace Datos
             }
         }
 
+        public static SqlDataReader GetALL_Users()
+        {
+            SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
+            try
+            {
+
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_GetAll_Users", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                return cmd.ExecuteReader();
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+                cn.Close();
+            }
+
+        }
 
     }
 }

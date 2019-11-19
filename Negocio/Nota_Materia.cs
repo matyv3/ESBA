@@ -20,16 +20,18 @@ namespace Negocio
             error = "";
             if (this.Nota_Materia_id.HasValue)
             {
+                int result = Convert.ToInt32(Datos.Notas_Materias.Update_Nota_Materia(this.Nota_Materia_id.Value, this.Nota_id,this.Materia_id));
+
                 return true;
             }
             else
             {
                 if (validar(out error))
                 {
-                    int result = Datos.Notas_Materias.Insert_Nota_Materia(
+                    int result = Convert.ToInt32(Datos.Notas_Materias.Insert_Nota_Materia(
                         this.Nota_id,
                         this.Materia_id
-                    ) ;
+                    )) ;
                     return result == 1;
                 }
                 else

@@ -20,16 +20,19 @@ namespace Negocio
             error = "";
             if (this.Id.HasValue)
             {
+
+                int result = Convert.ToInt32(Datos.Materias.Update_Materia(this.Id.Value, this.Nombre, this.CantModulos));
+
                 return true;
             }
             else
             {
                 if(validar(out error))
                 {
-                    int result = Datos.Materias.Insert_Materia(
+                    int result = Convert.ToInt32(Datos.Materias.Insert_Materia(
                         this.Nombre,
                         this.CantModulos
-                    );
+                    ));
                     return result == 1;
                 }
                 else
@@ -77,7 +80,7 @@ namespace Negocio
         {
             int resultado = 0;
 
-            int result = Datos.Materias.Validate_Materia(Nombre);
+            int result = Convert.ToInt32(Datos.Materias.Validate_Materia(Nombre));
 
             if (resultado == 1)
             {
