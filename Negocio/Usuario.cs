@@ -50,7 +50,7 @@ namespace Negocio
             }
         }
 
-        public static Usuario Obtener(int id)
+        /*public static Usuario Obtener(int id)
         {
             Usuario usuario = new Usuario();
 
@@ -71,10 +71,11 @@ namespace Negocio
             }
 
             return usuario;
-        }
+        }*/
 
-        /*public static Usuario Obtener(int id)
+        public static Usuario ObtenerUsuarios(int id)
         {
+            List<Usuario> usuarios = List<Usuario>;
             Usuario usuario = new Usuario();
 
             SqlDataReader dr = Datos.Usuarios.Get_User(id);
@@ -94,7 +95,7 @@ namespace Negocio
             }
 
             return usuario;
-        }*/
+        }
 
         public bool Grabar( out string error)
         {
