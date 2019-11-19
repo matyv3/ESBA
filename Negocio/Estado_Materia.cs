@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +11,15 @@ namespace Negocio
     class Estado_Materia
     {
 
+        public int? Estado_Materia_id { get; set; }
+        public string Descripcion { get; set; }
 
-        public int? Id { get; set; }
-        public string Nombre { get; set; }
-        public int CantModulos { get; set; }
 
 
         public bool Grabar(out string error)
         {
             error = "";
-            if (this.Id.HasValue)
+            if (this.Estado_Materia_id.HasValue)
             {
                 return true;
             }
@@ -26,9 +27,8 @@ namespace Negocio
             {
                 if (validar(out error))
                 {
-                    int result = Datos.Materias.Insert_Materia(
-                        this.Nombre,
-                        this.CantModulos
+                    int result = Datos.Estado_Materias.Insert_Estado_Materia(
+                        this.Descripcion
                     );
                     return result == 1;
                 }
@@ -40,31 +40,76 @@ namespace Negocio
             }
         }
 
-        public static List<Materia> ObtenerTodas()
+        public static List<Estado_Materia> ObtenerTodas()
         {
-            List<Materia> materias = new List<Materia>();
-            SqlDataReader dr = Datos.Materias.GetALL_Materia();
+            List<Estado_Materia> Estado_Materia = new List<Estado_Materia>();
+            SqlDataReader dr = Datos.Estado_Materias.GetALL_Estado_Materia();
             while (dr.Read())
             {
-                Materia materia = new Materia();
-                materia.Id = Convert.ToInt32(dr["Materia_id"]);
-                materia.Nombre = dr["nombre"].ToString();
-                materia.CantModulos = Convert.ToInt32(dr["Cant_Modulos"]);
-                materias.Add(materia);
+                Estado_Materia Est_mat = new Estado_Materia();
+                Est_mat.Estado_Materia_id = Convert.ToInt32(dr["Estado_Materia_id"]);
+                Est_mat.Descripcion = dr["Descripcion"].ToString();
+
+                Estado_Materia.Add(Est_mat);
             }
 
-            return materias;
+            return Estado_Materia;
+        }
+
+        public static Estado_Materia Obtener(int id)
+        {
+            Estado_Materia Est_Mat = new Estado_Materia();
+
+            SqlDataReader dr = Datos.Estado_Materias.Get_Estado_Materia(id);
+            while (dr.Read())
+            {
+                Est_Mat.Estado_Materia_id = Convert.ToInt32(dr["Estado_Materia_id"]);
+                Est_Mat.Descripcion = dr["Descripcion"].ToString();
+
+            }
+
+            return Est_Mat;
+        }
+
+        public bool Existe(string Descripcion)
+        {
+            int resultado = 0;
+
+            int result = Datos.Estado_Materias.Validate_Estado_Materia(Descripcion);
+
+            if (resultado == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool Eliminar(int id)
+        {
+            int resultado = 0;
+
+            resultado = Convert.ToInt32(Datos.Estado_Materias.Delete_Estado_Materia(id));
+
+            if (resultado == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         private bool validar(out string error)
         {
             error = "";
 
-            if (string.IsNullOrEmpty(Nombre))
-                error += "el nombre se encuentra vacio" + Environment.NewLine;
-
-            if (CantModulos == 0)
-                error += "cantidad de modulos incorrecta" + Environment.NewLine;
+            if (string.IsNullOrEmpty(Descripcion))
+                error += "la descripcion se encuentra vacio" + Environment.NewLine;
 
             if (string.IsNullOrEmpty(error))
                 return true;
@@ -72,5 +117,8 @@ namespace Negocio
                 return false;
 
         }
+
+
+
     }
 }

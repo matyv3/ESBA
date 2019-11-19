@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    class Estado_Materias
+    public class Estado_Materias
     {
 
         public Estado_Materias() { }
@@ -159,7 +159,7 @@ namespace Datos
 
 
 
-        public static int Validate_Notas(string Descripcion)
+        public static int Validate_Estado_Materia(string Descripcion)
         {
             try
             {

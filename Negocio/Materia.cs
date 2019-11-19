@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
@@ -59,26 +59,54 @@ namespace Negocio
 
         public static Materia Obtener(int id)
         {
-            Usuario Materia = new Usuario();
+            Materia Materia = new Materia();
 
-            SqlDataReader dr = Datos.Usuarios.Get_User(id);
+            SqlDataReader dr = Datos.Materias.Get_Materias(id);
             while (dr.Read())
             {
-                Materia.Id = Convert.ToInt32(dr["user_id"]);
-                Materia.Nombre = dr["document"].ToString();
-                Materia.CantModulos = dr["name"].ToString();
-                usuario.surname = dr["surname"].ToString();
-                usuario.sexo = dr["sexo"].ToString();
-                usuario.Address = dr["address"].ToString();
-                usuario.Phone = dr["phone"].ToString();
-                usuario.Email = dr["mail"].ToString();
-                usuario.Password = dr["password"].ToString();
-                usuario.Rol = dr["descripcion"].ToString();
-                usuario.rol_id = Convert.ToInt32(dr["rol_id"]);
+                Materia.Id = Convert.ToInt32(dr["Materia_id"]);
+                Materia.Nombre = dr["nombre"].ToString();
+                Materia.CantModulos = Convert.ToInt32(dr["Cant_Modulos"]);
+
             }
 
             return Materia;
         }
+
+        public bool Existe(string Nombre)
+        {
+            int resultado = 0;
+
+            int result = Datos.Materias.Validate_Materia(Nombre);
+
+            if (resultado == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        public bool Eliminar(int id)
+        {
+            int resultado = 0;
+
+            resultado = Convert.ToInt32(Datos.Materias.Delete_Materia(id));
+
+            if (resultado == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
 
 
         private bool validar(out string error)
@@ -97,5 +125,10 @@ namespace Negocio
                 return false;
 
         }
+
+
+
+
+
     }
 }
