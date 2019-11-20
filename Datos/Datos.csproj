@@ -58,6 +58,7 @@
     <Content Include="Sql\Notas.sql" />
     <Content Include="Sql\Nota_Materia.sql" />
     <Content Include="Sql\Roles.sql" />
+    <Content Include="Sql\Consultas.sql" />
     <Content Include="Sql\Usuario_Materia.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

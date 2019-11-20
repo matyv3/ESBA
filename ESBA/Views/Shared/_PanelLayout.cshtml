@@ -38,8 +38,8 @@
                     }
                     @if (Session["Rol"].ToString() != "alumno")
                     {
-                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "alumnos" ? "active" : "")">
-                            <a href="~/panel/alumnos">
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "estudiantes" ? "active" : "")">
+                            <a href="~/panel/estudiantes">
                                 <i class="now-ui-icons users_single-02"></i>
                                 <p>Alumnos</p>
                             </a>
