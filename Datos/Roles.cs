@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    class Roles
+    public class Roles
     {
         public Roles() { }
 
