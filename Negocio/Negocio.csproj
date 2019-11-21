@@ -46,6 +46,7 @@
     <Compile Include="Materia.cs" />
     <Compile Include="Nota.cs" />
     <Compile Include="Nota_Materia.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="Seguridad.cs" />
     <Compile Include="Usuario.cs" />

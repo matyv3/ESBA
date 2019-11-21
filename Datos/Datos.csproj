@@ -45,6 +45,7 @@
     <Compile Include="Materias.cs" />
     <Compile Include="Notas.cs" />
     <Compile Include="Notas_Materias.cs" />
+    <Compile Include="Querys.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

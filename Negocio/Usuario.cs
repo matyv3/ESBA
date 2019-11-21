@@ -73,7 +73,7 @@ namespace Negocio
             return usuario;
         }
 
-        public static List<Usuario> ObtenerUsuarios(int id)
+        public static List<Usuario> ObtenerUsuarios()
         {
             List<Usuario> usuarios = new List<Usuario>();
             
@@ -94,6 +94,34 @@ namespace Negocio
                 usuario.Password = dr["password"].ToString();
                 usuario.Rol = dr["descripcion"].ToString();
                 usuario.rol_id = Convert.ToInt32(dr["rol_id"]);
+
+                usuarios.Add(usuario);
+            }
+
+            return usuarios;
+        }
+
+        public static List<Usuario> ObtenerUsuarios_Por_Rol(int rol_id)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+
+
+            SqlDataReader dr = Datos.Usuarios.GetALL_User_For_Rol(rol_id);
+            while (dr.Read())
+            {
+                Usuario usuario = new Usuario();
+
+                usuario.user_id = Convert.ToInt32(dr["U.user_id"]);
+                usuario.document = dr["U.document"].ToString();
+                usuario.name = dr["U.name"].ToString();
+                usuario.surname = dr["U.surname"].ToString();
+                usuario.sexo = dr["U.sexo"].ToString();
+                usuario.Address = dr["U.address"].ToString();
+                usuario.Phone = dr["U.phone"].ToString();
+                usuario.Email = dr["U.mail"].ToString();
+                usuario.Password = dr["U.password"].ToString();
+                usuario.Rol = dr["U.descripcion"].ToString();
+                usuario.rol_id = Convert.ToInt32(dr["U.rol_id"]);
 
                 usuarios.Add(usuario);
             }

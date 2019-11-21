@@ -212,5 +212,30 @@ namespace Datos
 
         }
 
+        public static SqlDataReader GetALL_User_For_Rol(int rol_id)
+        {
+            SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
+            try
+            {
+
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_Get_ALLUser_Rol", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@rol_id", rol_id);
+                return cmd.ExecuteReader();
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+                cn.Close();
+            }
+
+        }
+
+
     }
 }
