@@ -276,3 +276,15 @@ begin
 	select * from Usuario_Materia
 end
 return
+
+create procedure sp_Get_Usuario_Materia_por_user_materia
+	@user_id int,
+	@materia_id int
+as
+begin
+	
+	select * from Usuario_Materia n
+	where n.user_id = @user_id and n.materia_id = @materia_id
+	
+end
+return

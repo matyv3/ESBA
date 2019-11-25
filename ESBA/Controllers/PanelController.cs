@@ -132,5 +132,21 @@ namespace ESBA.Controllers
         public ActionResult Historial() {
             return View();
         }
+
+        [HttpPost]
+        public JsonResult Nota(int materia_id, int user_id, int nota)
+        {
+            string error;
+            
+            Usuario_Materia um = Usuario_Materia.Obtener_por_user_y_materia(user_id, materia_id);
+            um.Nota_Valor = nota;
+            um.Grabar(out error);
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                return Json(error);
+            }
+            return Json("sucess");
+        } 
     }
 }

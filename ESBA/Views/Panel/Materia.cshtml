@@ -20,7 +20,7 @@
                             <th>Teléfono</th>
                             <th>Dirección</th>
                             <th>Nota</th>
-                            </th>
+                            <th></th>
                             <tbody>
                                 @foreach (var user in Model.alumnos)
                                 {
@@ -30,15 +30,23 @@
                                         <td>@user.document</td>
                                         <td>@user.Phone</td>
                                         <td>@user.Address</td>
-                                        <td>
+                                        <td style="white-space:nowrap;width:100px;">
                                             @if (ViewBag.Rol != "profesor")
                                             {
-                                                <input type="number" name="nota" value="@user.Nota" class="form-control" disabled />
+                                                @user.Nota
                                             }
                                             else
                                             {
-                                                <input type="number" name="nota" value="@user.Nota" class="form-control" />
+                                                <input type="number" name="nota" value="@user.Nota" class="form-control nota user-@user.user_id"/>                                                
                                             }
+                                        </td>
+                                        <td style="white-space:nowrap;width:100px;">
+                                            <button 
+                                                type="button"
+                                                data-user="@user.user_id"
+                                                data-materia="@Model.Id"
+                                                class="btn btn-info btn-round set-nota"
+                                            >Actualizar</button>
                                         </td>
                                     </tr>
                                 }
@@ -50,3 +58,14 @@
         </div>
     </div>
 
+    <script>
+        $(document).on('click', 'button.set-nota', function () {
+            var user_id = $(this).data('user')
+            var materia_id = $(this).data('materia')
+            var nota = $('.nota.user-' + user_id).val()
+
+            $.post("@Url.Action("Nota","Panel")", { user_id, nota, materia_id }, function (res) {
+                console.log(res)
+            })
+        })
+    </script>

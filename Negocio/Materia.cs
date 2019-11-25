@@ -89,7 +89,10 @@ namespace Negocio
                     alumno.Phone = data["phone"].ToString();
                     alumno.Email = data["mail"].ToString();
                     alumno.Rol = data["Rol_Descripcion"].ToString();
-                    alumno.Nota = Convert.ToInt32(data["Nota_Valor"]);
+                    if(data["Nota_valor"] != DBNull.Value)
+                    {
+                        alumno.Nota = Convert.ToInt32(data["Nota_Valor"]);
+                    }
                     Materia.alumnos.Add(alumno);
                 }
             }

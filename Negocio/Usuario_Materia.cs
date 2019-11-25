@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Negocio
 {
-    class Usuario_Materia
+    public class Usuario_Materia
     {
 
 
@@ -65,11 +65,29 @@ namespace Negocio
             return Usuario_Materia;
         }
 
-        public static Usuario_Materia Obtener(int id)
+        public Usuario_Materia Obtener(int id)
         {
             Usuario_Materia User_Mat = new Usuario_Materia();
 
             SqlDataReader dr = Datos.Usuarios_Materias.Get_Usuario_Materia(id);
+            while (dr.Read())
+            {
+                User_Mat.Usuario_Materia_id = Convert.ToInt32(dr["Usuario_Materia_id"]);
+                User_Mat.user_id = Convert.ToInt32(dr["user_id"]);
+                User_Mat.materia_id = Convert.ToInt32(dr["materia_id"]);
+                User_Mat.Estado_Materia_id = Convert.ToInt32(dr["Estado_Materia_id"]);
+                User_Mat.Nota_Valor = Convert.ToInt32(dr["Nota_Valor"]);
+
+            }
+
+            return User_Mat;
+        }
+
+        public static Usuario_Materia Obtener_por_user_y_materia(int user_id, int materia_id)
+        {
+            Usuario_Materia User_Mat = new Usuario_Materia();
+
+            SqlDataReader dr = Datos.Usuarios_Materias.Get_Usuario_Materia(user_id, materia_id);
             while (dr.Read())
             {
                 User_Mat.Usuario_Materia_id = Convert.ToInt32(dr["Usuario_Materia_id"]);

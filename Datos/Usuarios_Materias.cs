@@ -159,6 +159,31 @@ namespace Datos
 
         }
 
+        public static SqlDataReader Get_Usuario_Materia(int user_id, int materia_id)
+        {
+            SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
+            try
+            {
+
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_Get_Usuario_Materia_por_user_materia", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@user_id", user_id);
+                cmd.Parameters.AddWithValue("@materia_id", materia_id);
+                return cmd.ExecuteReader();
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+                cn.Close();
+            }
+
+        }
+
 
 
         public static int Validate_Usuario_Materia(int user_id, int materia_id)
