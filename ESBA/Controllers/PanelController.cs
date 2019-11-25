@@ -69,16 +69,16 @@ namespace ESBA.Controllers
 
         public ActionResult Materias(int? id)
         {
+            Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
+            ViewBag.rol = user.Rol;
             if (id != null)
             {
-                Materia materia = Materia.Obtener(Convert.ToInt32(id));
+                Materia materia = Materia.Obtener(Convert.ToInt32(id));                    
                 return View("Materia", materia);
             }
             else
             {
-                Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
                 List<Materia> materias = Materia.ObtenerTodas();
-                ViewBag.rol = user.Rol;
                 return View(materias);
             }
 

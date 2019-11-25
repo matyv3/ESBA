@@ -31,7 +31,14 @@
                                         <td>@user.Phone</td>
                                         <td>@user.Address</td>
                                         <td>
-                                            <input type="number" name="nota" value="@user.Nota" class="form-control"/>
+                                            @if (ViewBag.Rol != "profesor")
+                                            {
+                                                <input type="number" name="nota" value="@user.Nota" class="form-control" disabled />
+                                            }
+                                            else
+                                            {
+                                                <input type="number" name="nota" value="@user.Nota" class="form-control" />
+                                            }
                                         </td>
                                     </tr>
                                 }
