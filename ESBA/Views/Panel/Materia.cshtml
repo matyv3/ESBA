@@ -9,6 +9,9 @@
                 <div class="card-header">
                     <a href="~/panel/materias"> <i class="now-ui-icons arrows-1_minimal-left"></i> Volver al listado</a>
                     <h4 class="card-title">Estudiantes de @Model.Nombre</h4>
+                    <div class="alert alert-success" id="toast" style="display:none;" role="alert">
+                        Nota Actualizada!
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -24,30 +27,35 @@
                             <tbody>
                                 @foreach (var user in Model.alumnos)
                                 {
-                                    <tr>
-                                        <td>@user.name @user.surname</td>
-                                        <td>@user.Email</td>
-                                        <td>@user.document</td>
-                                        <td>@user.Phone</td>
-                                        <td>@user.Address</td>
+                                <tr>
+                                    <td>@user.name @user.surname</td>
+                                    <td>@user.Email</td>
+                                    <td>@user.document</td>
+                                    <td>@user.Phone</td>
+                                    <td>@user.Address</td>
+
+                                    @if (ViewBag.Rol != "profesor")
+                                    {
                                         <td style="white-space:nowrap;width:100px;">
-                                            @if (ViewBag.Rol != "profesor")
-                                            {
-                                                @user.Nota
-                                            }
-                                            else
-                                            {
-                                                <input type="number" name="nota" value="@user.Nota" class="form-control nota user-@user.user_id"/>                                                
-                                            }
+                                            @user.Nota
+                                        </td>
+                                        <td></td>
+
+                                    }
+                                    else
+                                    {
+                                        <td style="white-space:nowrap;width:100px;">
+                                            <input type="number" name="nota" min="0" max="10" value="@user.Nota" class="form-control nota user-@user.user_id" />
                                         </td>
                                         <td style="white-space:nowrap;width:100px;">
-                                            <button 
-                                                type="button"
-                                                data-user="@user.user_id"
-                                                data-materia="@Model.Id"
-                                                class="btn btn-info btn-round set-nota"
-                                            >Actualizar</button>
+                                            <button type="button"
+                                                    data-user="@user.user_id"
+                                                    data-materia="@Model.Id"
+                                                    class="btn btn-info btn-round set-nota">
+                                                Actualizar
+                                            </button>
                                         </td>
+                                    }
                                     </tr>
                                 }
                             </tbody>
@@ -66,6 +74,10 @@
 
             $.post("@Url.Action("Nota","Panel")", { user_id, nota, materia_id }, function (res) {
                 console.log(res)
+                $('#toast').fadeIn();
+                setTimeout(function () {
+                    $('#toast').fadeOut();
+                }, 3000)
             })
         })
     </script>

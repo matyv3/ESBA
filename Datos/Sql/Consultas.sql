@@ -44,6 +44,8 @@ inner join Roles R on R.rol_id = U.rol_id
 
 where Um.Materia_id = @Materia_id
 
+group by U.user_id, U.name, U.document, U.mail, U.phone, U.surname, U.address, R.descripcion, M.Materia_id, M.nombre, um.Nota_Valor, EM.Descripcion
+
 end
 return
 
