@@ -12,7 +12,7 @@ from users U
 
 inner join Usuario_Materia um on um.user_id = U.user_id
 inner join Estado_Materia EM on EM.Estado_Materia_Id = um.Estado_Materia_id
-inner join Nota_Materia NM on NM.Materia_id = um.materia_id
+inner join Nota_Materia NM on NM.Usuario_Materia_id = um.Usuario_Materia_id
 inner join Notas N on N.Nota_id = NM.Nota_id
 inner join Materias M on M.Materia_id = um.materia_id
 inner join Roles R on R.rol_id = U.rol_id
