@@ -1,7 +1,45 @@
-﻿
+﻿@model Negocio.Materia
 @{
     ViewBag.Title = "Materia";
 }
 
-<h2>Materia</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <a href="~/panel/materias"> <i class="now-ui-icons arrows-1_minimal-left"></i> Volver al listado</a>
+                    <h4 class="card-title">Estudiantes de @Model.Nombre</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>DNI</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Nota</th>
+                            </th>
+                            <tbody>
+                                @foreach (var user in Model.alumnos)
+                                {
+                                    <tr>
+                                        <td>@user.name @user.surname</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.document</td>
+                                        <td>@user.Phone</td>
+                                        <td>@user.Address</td>
+                                        <td>
+                                            <input type="number" name="nota" value="@user.Nota" class="form-control"/>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 

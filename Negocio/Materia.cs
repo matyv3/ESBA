@@ -14,7 +14,7 @@ namespace Negocio
         public string Nombre { get; set; }
         public int CantModulos { get; set; }
 
-        List<Usuario> alumnos = new List<Usuario>();
+        public List<Usuario> alumnos = new List<Usuario>();
 
 
         public bool Grabar(out string error)
@@ -81,14 +81,15 @@ namespace Negocio
                 while (data.Read())
                 {
                     Usuario alumno = new Usuario();
-                    alumno.user_id = Convert.ToInt32(dr["U.User_id"]);
-                    alumno.document = dr["U.document"].ToString();
-                    alumno.name = dr["User_nombre"].ToString();
-                    alumno.surname = dr["User_Apellido"].ToString();
-                    alumno.Address = dr["U.address"].ToString();
-                    alumno.Phone = dr["U.phone"].ToString();
-                    alumno.Email = dr["U.mail"].ToString();
-                    alumno.Rol = dr["Rol_Descripcion"].ToString();
+                    alumno.user_id = Convert.ToInt32(data["User_id"]);
+                    alumno.document = data["document"].ToString();
+                    alumno.name = data["User_nombre"].ToString();
+                    alumno.surname = data["User_Apellido"].ToString();
+                    alumno.Address = data["address"].ToString();
+                    alumno.Phone = data["phone"].ToString();
+                    alumno.Email = data["mail"].ToString();
+                    alumno.Rol = data["Rol_Descripcion"].ToString();
+                    alumno.Nota = Convert.ToInt32(data["Nota_Valor"]);
                     Materia.alumnos.Add(alumno);
                 }
             }

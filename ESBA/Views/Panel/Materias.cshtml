@@ -26,7 +26,7 @@
                                         <td>@materia.Nombre</td>
                                         <td>@materia.CantModulos</td>
                                         <td>
-                                            <a href="@Url.Action("Materias","Panel")" class="btn btn-info">Ver Alumnos</a>
+                                            <a href="@Url.Action("Materias","Panel", new { id = materia.Id })" class="btn btn-info">Ver Alumnos</a>
                                         </td>
                                     </tr>
                                 }
