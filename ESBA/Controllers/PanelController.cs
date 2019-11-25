@@ -107,13 +107,10 @@ namespace ESBA.Controllers
         public ActionResult Estudiantes()
         {
             Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
-            if(user.Rol == "alumno")
+            if(user.Rol != "administrativo")
             {
                 return RedirectToAction("NotFound","Error");
             }
-
-            // si es profesor hay que traer los alumnos suyos
-            // si es administrativo todos
             List<Usuario> estudiantes = Usuario.ObtenerUsuarios_Por_Rol(1);
             return View(estudiantes);
         }
