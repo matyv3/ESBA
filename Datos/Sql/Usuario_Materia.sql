@@ -6,7 +6,8 @@ create table Usuario_Materia
 	Usuario_Materia_id int identity(1,1),
 	user_id int,
 	materia_id int,
-	Estado_Materia_id int
+	Estado_Materia_id int,
+	Nota_Valor int
 
 	foreign key (user_id) references users (user_id),
 	foreign key (Materia_id) references Materias (Materia_id),
@@ -21,7 +22,8 @@ create table Deleted_Usuario_Materia
 	Usuario_Materia_id int,
 	user_id int,
 	materia_id int,
-	Estado_Materia_id int
+	Estado_Materia_id int,
+	Nota_Valor int
 	
 	primary key (Deleted_Usuario_Materia_id)
 )
@@ -67,6 +69,7 @@ create procedure sp_Insert_Usuario_Materia
 @user_id int,
 @materia_id int,
 @Estado_Materia_id int,
+@Nota_Valor int,
 @mensaje int output
 
 as
@@ -74,8 +77,8 @@ begin
 	begin transaction
 	begin try
 
-		insert into Usuario_Materia (user_id,materia_id,Estado_Materia_id)
-		values (@user_id,@materia_id,@Estado_Materia_id)
+		insert into Usuario_Materia (user_id,materia_id,Estado_Materia_id,Nota_Valor)
+		values (@user_id,@materia_id,@Estado_Materia_id,@Nota_Valor)
 
 		set @mensaje = (select m.Usuario_Materia_id from Usuario_Materia m where m.user_id = @user_id and m.materia_id = @materia_id)
 
@@ -98,6 +101,7 @@ create procedure sp_Update_Usuario_Materia
 	@user_id int,
 	@materia_id int,
 	@Estado_Materia_id int,
+	@Nota_Valor int,
 	@mensaje int output
 
 as
@@ -105,7 +109,7 @@ begin
 	begin transaction
 	begin try
 
-		update Usuario_Materia set user_id = @user_id, materia_id = @materia_id, Estado_Materia_id = @Estado_Materia_id where Usuario_Materia_id = @Usuario_Materia_id
+		update Usuario_Materia set user_id = @user_id, materia_id = @materia_id, Estado_Materia_id = @Estado_Materia_id, Nota_Valor = @Nota_Valor where Usuario_Materia_id = @Usuario_Materia_id
 		set @mensaje = 1
 
 	commit transaction
@@ -170,8 +174,8 @@ for delete
 			insert into Auditoria (Action,table_name,item_id,user_id)
 			values (@Action,@table_name,@item_id,@user_id)
 
-			insert into Deleted_Usuario_Materia (Usuario_Materia_id,user_id,materia_id,Estado_Materia_id)
-			select d.Usuario_Materia_id,d.user_id,d.materia_id, d.Estado_Materia_id, from deleted d
+			insert into Deleted_Usuario_Materia (Usuario_Materia_id,user_id,materia_id,Estado_Materia_id,Nota_Valor)
+			select d.Usuario_Materia_id,d.user_id,d.materia_id, d.Estado_Materia_id, d.Nota_Valor from deleted d
 
 		commit transaction
 		end try

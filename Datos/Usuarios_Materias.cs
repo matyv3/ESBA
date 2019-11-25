@@ -20,7 +20,7 @@ namespace Datos
         /// <param name="materia_name"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve ID de Nota insertada o 0 en caso de error </returns>
-        public static int Insert_Usuario_Materia(int user_id, int materia_id, int Estado_Materia_id)
+        public static int Insert_Usuario_Materia(int user_id, int materia_id, int Estado_Materia_id,int Nota_Valor)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@user_id", user_id);
                 cmd.Parameters.AddWithValue("@materia_id", materia_id);
                 cmd.Parameters.AddWithValue("@Estado_Materia_id", Estado_Materia_id);
-
+                cmd.Parameters.AddWithValue("@Nota_Valor", Nota_Valor);
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();
@@ -58,7 +58,7 @@ namespace Datos
         /// <param name="nombre"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve 1 si fue exitoso o 0 en caso de error </returns>
-        public static int Update_Usuario_Materia(int Usuario_Materia_id, int user_id, int materia_id, int Estado_Materia_id)
+        public static int Update_Usuario_Materia(int Usuario_Materia_id, int user_id, int materia_id, int Estado_Materia_id, int Nota_Valor)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace Datos
                 cmd.Parameters.AddWithValue("@user_id", user_id);
                 cmd.Parameters.AddWithValue("@materia_id", materia_id);
                 cmd.Parameters.AddWithValue("@Estado_Materia_id", Estado_Materia_id);
-
+                cmd.Parameters.AddWithValue("@Nota_Valor", Nota_Valor);
                 cmd.Parameters.Add("@mensaje", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 cmd.ExecuteNonQuery();

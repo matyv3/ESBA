@@ -5,10 +5,10 @@ create table Nota_Materia
 (
 	Nota_Materia_id int identity(1,1),
 	Nota_id int,
-	Materia_id int,
+	Usuario_Materia_id int,
 
 	foreign key (Nota_id) references Notas (Nota_id),
-	foreign key (Materia_id) references Materias (Materia_id),
+	foreign key (Usuario_Materia_id) references Usuario_Materia (Usuario_Materia_id),
 	primary key (Nota_Materia_id)
 )
 

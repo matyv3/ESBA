@@ -17,6 +17,8 @@ namespace Negocio
         public int materia_id { get; set; }
         public int Estado_Materia_id { get; set; }
 
+        public int Nota_Valor { get; set; }
+
         public bool Grabar(out string error)
         {
             error = "";
@@ -24,7 +26,7 @@ namespace Negocio
             {
 
 
-                int result = Convert.ToInt32(Datos.Usuarios_Materias.Update_Usuario_Materia(this.Usuario_Materia_id.Value, this.user_id, this.materia_id, this.Estado_Materia_id));
+                int result = Convert.ToInt32(Datos.Usuarios_Materias.Update_Usuario_Materia(this.Usuario_Materia_id.Value, this.user_id, this.materia_id, this.Estado_Materia_id,this.Nota_Valor));
 
                 return true;
             }
@@ -32,7 +34,7 @@ namespace Negocio
             {
                 if (validar(out error))
                 {
-                    int result = Convert.ToInt32(Datos.Usuarios_Materias.Insert_Usuario_Materia(  this.user_id, this.materia_id, this.Estado_Materia_id));
+                    int result = Convert.ToInt32(Datos.Usuarios_Materias.Insert_Usuario_Materia(  this.user_id, this.materia_id, this.Estado_Materia_id, this.Nota_Valor));
                     return result == 1;
                 }
                 else
@@ -54,6 +56,8 @@ namespace Negocio
                 User_Mat.user_id = Convert.ToInt32(dr["user_id"]);
                 User_Mat.materia_id = Convert.ToInt32(dr["materia_id"]);
                 User_Mat.Estado_Materia_id = Convert.ToInt32(dr["Estado_Materia_id"]);
+                User_Mat.Nota_Valor = Convert.ToInt32(dr["Nota_Valor"]);
+                
 
                 Usuario_Materia.Add(User_Mat);
             }
@@ -72,6 +76,7 @@ namespace Negocio
                 User_Mat.user_id = Convert.ToInt32(dr["user_id"]);
                 User_Mat.materia_id = Convert.ToInt32(dr["materia_id"]);
                 User_Mat.Estado_Materia_id = Convert.ToInt32(dr["Estado_Materia_id"]);
+                User_Mat.Nota_Valor = Convert.ToInt32(dr["Nota_Valor"]);
 
             }
 
@@ -124,6 +129,9 @@ namespace Negocio
 
             if (string.IsNullOrEmpty(Convert.ToString(this.Estado_Materia_id)))
                 error += "la ID del Estado de la materia se encuentra vacio" + Environment.NewLine;
+
+            if (string.IsNullOrEmpty(Convert.ToString(this.Nota_Valor)))
+                error += "la Nota de la materia se encuentra vacio" + Environment.NewLine;
 
             if (string.IsNullOrEmpty(error))
                 return true;
