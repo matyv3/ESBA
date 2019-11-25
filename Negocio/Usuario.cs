@@ -111,17 +111,17 @@ namespace Negocio
             {
                 Usuario usuario = new Usuario();
 
-                usuario.user_id = Convert.ToInt32(dr["U.user_id"]);
-                usuario.document = dr["U.document"].ToString();
-                usuario.name = dr["U.name"].ToString();
-                usuario.surname = dr["U.surname"].ToString();
-                usuario.sexo = dr["U.sexo"].ToString();
-                usuario.Address = dr["U.address"].ToString();
-                usuario.Phone = dr["U.phone"].ToString();
-                usuario.Email = dr["U.mail"].ToString();
-                usuario.Password = dr["U.password"].ToString();
-                usuario.Rol = dr["U.descripcion"].ToString();
-                usuario.rol_id = Convert.ToInt32(dr["U.rol_id"]);
+                usuario.user_id = Convert.ToInt32(dr["user_id"]);
+                usuario.document = dr["document"].ToString();
+                usuario.name = dr["name"].ToString();
+                usuario.surname = dr["surname"].ToString();
+                usuario.sexo = dr["sexo"].ToString();
+                usuario.Address = dr["address"].ToString();
+                usuario.Phone = dr["phone"].ToString();
+                usuario.Email = dr["mail"].ToString();
+                usuario.Password = dr["password"].ToString();
+                usuario.Rol = dr["descripcion"].ToString();
+                usuario.rol_id = Convert.ToInt32(dr["rol_id"]);
 
                 usuarios.Add(usuario);
             }

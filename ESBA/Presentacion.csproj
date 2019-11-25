@@ -205,6 +205,7 @@
     <Content Include="Views\Panel\CrearMateria.cshtml" />
     <Content Include="Views\Panel\Historial.cshtml" />
     <Content Include="Views\Error\_ViewStart.cshtml" />
+    <Content Include="Views\Panel\Materia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

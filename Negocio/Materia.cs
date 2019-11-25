@@ -14,6 +14,8 @@ namespace Negocio
         public string Nombre { get; set; }
         public int CantModulos { get; set; }
 
+        List<Usuario> alumnos = new List<Usuario>();
+
 
         public bool Grabar(out string error)
         {
@@ -71,6 +73,24 @@ namespace Negocio
                 Materia.Nombre = dr["nombre"].ToString();
                 Materia.CantModulos = Convert.ToInt32(dr["Cant_Modulos"]);
 
+            }
+
+            if(Materia.Id != null)
+            {
+                SqlDataReader data = Datos.Querys.Query_For_MateriaID(Convert.ToInt32(Materia.Id));
+                while (data.Read())
+                {
+                    Usuario alumno = new Usuario();
+                    alumno.user_id = Convert.ToInt32(dr["U.User_id"]);
+                    alumno.document = dr["U.document"].ToString();
+                    alumno.name = dr["User_nombre"].ToString();
+                    alumno.surname = dr["User_Apellido"].ToString();
+                    alumno.Address = dr["U.address"].ToString();
+                    alumno.Phone = dr["U.phone"].ToString();
+                    alumno.Email = dr["U.mail"].ToString();
+                    alumno.Rol = dr["Rol_Descripcion"].ToString();
+                    Materia.alumnos.Add(alumno);
+                }
             }
 
             return Materia;

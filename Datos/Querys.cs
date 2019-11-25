@@ -46,7 +46,7 @@ namespace Datos
             {
 
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("sp_Query_User_id", cn);
+                SqlCommand cmd = new SqlCommand("sp_Query_Materia_id", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Materia_id", Materia_id);
                 return cmd.ExecuteReader();
@@ -62,7 +62,5 @@ namespace Datos
             }
 
         }
-
-
     }
 }

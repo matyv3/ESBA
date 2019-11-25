@@ -1,7 +1,40 @@
-﻿
+﻿@model IEnumerable<Negocio.Usuario>
 @{
     ViewBag.Title = "Profesores";
 }
 
-<h2>Profesores</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Profesores</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="text-primary">
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>DNI</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        </thead>
+                        <tbody>
+                            @foreach (var profe in Model)
+                            {
+                                <tr>
+                                    <td>@profe.name @profe.surname</td>
+                                    <td>@profe.Email</td>
+                                    <td>@profe.document</td>
+                                    <td>@profe.Phone</td>
+                                    <td>@profe.Address</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 

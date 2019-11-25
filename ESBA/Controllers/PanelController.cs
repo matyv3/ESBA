@@ -67,10 +67,21 @@ namespace ESBA.Controllers
             return RedirectToAction("Index", "Auth");
         }
 
-        public ActionResult Materias()
+        public ActionResult Materias(int? id)
         {
-            List<Materia> materias = Materia.ObtenerTodas();
-            return View(materias);
+            if (id != null)
+            {
+                Materia materia = Materia.Obtener(Convert.ToInt32(id));
+                return View("Materia", materia);
+            }
+            else
+            {
+                Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
+                List<Materia> materias = Materia.ObtenerTodas();
+                ViewBag.rol = user.Rol;
+                return View(materias);
+            }
+
         }
 
         public ActionResult CrearMateria()
@@ -96,11 +107,15 @@ namespace ESBA.Controllers
         public ActionResult Estudiantes()
         {
             Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
-            if(user.Rol != "administrativo")
+            if(user.Rol == "alumno")
             {
                 return RedirectToAction("NotFound","Error");
             }
-            return View();
+
+            // si es profesor hay que traer los alumnos suyos
+            // si es administrativo todos
+            List<Usuario> estudiantes = Usuario.ObtenerUsuarios_Por_Rol(1);
+            return View(estudiantes);
         }
 
         public ActionResult Profesores()
@@ -110,7 +125,8 @@ namespace ESBA.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return View();
+            List<Usuario> profesores = Usuario.ObtenerUsuarios_Por_Rol(2);
+            return View(profesores);
         }
 
         public ActionResult Historial() {

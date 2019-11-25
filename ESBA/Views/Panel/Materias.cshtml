@@ -11,23 +11,50 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead class="text-primary">
-                        <th>Nombre</th>
-                        <th>Profesor</th>
-                        <th>Estado</th>
-                        </thead>
-                        <tbody>
-                            @foreach (var materia in Model)
-                            {
-                                <tr>
-                                    <td>@materia.Nombre</td>
-                                    <td>Nacho</td>
-                                    <td>en veremos</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    @if (ViewBag.rol != "profesor")
+                    {
+                        <table class="table">
+                            <thead class="text-primary">
+                            <th>Nombre</th>
+                            <th>Cant. Módulos</th>
+                            <th>Opciones</th>
+                            </thead>
+                            <tbody>
+                                @foreach (var materia in Model)
+                                {
+                                    <tr>
+                                        <td>@materia.Nombre</td>
+                                        <td>@materia.CantModulos</td>
+                                        <td>
+                                            <a href="@Url.Action("Materias","Panel")" class="btn btn-info">Ver Alumnos</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <table class="table">
+                            <thead class="text-primary">
+                            <th>Nombre</th>
+                            <th>Cant. Módulos</th>
+                            <th>Opciones</th>
+                            </thead>
+                            <tbody>
+                                @foreach (var materia in Model)
+                                {
+                                    <tr>
+                                        <td>@materia.Nombre</td>
+                                        <td>@materia.CantModulos</td>
+                                        <td>anotarme</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+
+
                 </div>
             </div>
         </div>

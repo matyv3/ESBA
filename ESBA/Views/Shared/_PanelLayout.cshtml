@@ -45,6 +45,15 @@
                             </a>
                         </li>
                     }
+                    @if (Session["Rol"].ToString() == "administrativo")
+                    {
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "profesores" ? "active" : "")">
+                            <a href="~/panel/profesores">
+                                <i class="now-ui-icons users_single-02"></i>
+                                <p>Profesores</p>
+                            </a>
+                        </li>
+                    }
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "perfil" ? "active" : "")">
                         <a href="~/panel/perfil">
                             <i class="now-ui-icons users_single-02"></i>
