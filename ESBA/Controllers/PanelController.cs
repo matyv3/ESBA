@@ -29,7 +29,7 @@ namespace ESBA.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("Materias","Panel");
+            return RedirectToAction("Materias", "Panel");
         }
 
         public ActionResult Perfil()
@@ -73,13 +73,26 @@ namespace ESBA.Controllers
             ViewBag.rol = user.Rol;
             if (id != null)
             {
-                Materia materia = Materia.Obtener(Convert.ToInt32(id));                    
+                //List<Estado_Materia> estados = Estado_Materia.ObtenerTodas();
+
+                Materia materia = Materia.Obtener(Convert.ToInt32(id));
                 return View("Materia", materia);
             }
             else
             {
-                List<Materia> materias = Materia.ObtenerTodas();
-                return View(materias);
+                // si es alumno mostrar todas a las que se puede anotar
+                if(user.Rol == "alumno")
+                {
+                    List<Materia> materias = Materia.ObtenerDisponibles(Convert.ToInt32(user.user_id));
+                    return View(materias);
+                }
+                else
+                {
+                    // si es profe mostrar solo las que da el
+                    List<Materia> materias = Materia.ObtenerTodas();
+                    return View(materias);
+                }
+
             }
 
         }
@@ -107,9 +120,9 @@ namespace ESBA.Controllers
         public ActionResult Estudiantes()
         {
             Usuario user = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
-            if(user.Rol != "administrativo")
+            if (user.Rol != "administrativo")
             {
-                return RedirectToAction("NotFound","Error");
+                return RedirectToAction("NotFound", "Error");
             }
             List<Usuario> estudiantes = Usuario.ObtenerUsuarios_Por_Rol(1);
             return View(estudiantes);
@@ -126,24 +139,40 @@ namespace ESBA.Controllers
             return View(profesores);
         }
 
-        public ActionResult Historial() {
-            return View();
+        public ActionResult Historial()
+        {
+            List<Materia> materias = Materia.ObtenerPorAlumno(Convert.ToInt32(Session["user_id"]));
+            return View(materias);
         }
 
         [HttpPost]
         public JsonResult Nota(int materia_id, int user_id, int nota)
         {
-            string error;
-            
             Usuario_Materia um = Usuario_Materia.Obtener_por_user_y_materia(user_id, materia_id);
             um.Nota_Valor = nota;
-            um.Grabar(out error);
+            um.Grabar(out string error);
 
             if (!string.IsNullOrEmpty(error))
             {
                 return Json(error);
             }
             return Json("sucess");
-        } 
+        }
+
+        [HttpPost]
+        public JsonResult Inscribirse(int materia_id)
+        {
+            Usuario_Materia um = new Usuario_Materia();
+            um.materia_id = materia_id;
+            um.user_id = Convert.ToInt32(Session["user_id"]);
+            um.Nota_Valor = 0;
+            um.Estado_Materia_id = 1;
+            um.Grabar(out string error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                return Json(error);
+            }
+            return Json("success");
+        }
     }
 }

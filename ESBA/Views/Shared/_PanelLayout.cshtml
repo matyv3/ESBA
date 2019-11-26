@@ -37,7 +37,7 @@
                             </a>
                         </li>
                     }
-                    @if (Session["Rol"].ToString() != "alumno")
+                    @if (Session["Rol"].ToString() == "administrativo")
                     {
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "estudiantes" ? "active" : "")">
                             <a href="~/panel/estudiantes">

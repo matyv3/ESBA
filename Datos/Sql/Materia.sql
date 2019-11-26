@@ -265,3 +265,28 @@ end
 return
 
 
+create procedure sp_GetAll_Materias_Disponibles
+	@user_id int
+as
+begin
+	
+	select m.* from Materias m
+	where m.Materia_id not in (
+		select Materia_id from Usuario_Materia where user_id = @user_id
+	)
+	
+end
+return
+
+create procedure sp_GetAll_Materias_Alumno
+	@user_id int
+as
+begin
+	
+	select m.*, em.* from Materias m
+	inner join Usuario_Materia um on um.materia_id = m.Materia_id
+	inner join Estado_Materia em on em.Estado_Materia_id = um.Estado_Materia_id
+	where um.user_id = @user_id
+	
+end
+return

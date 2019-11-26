@@ -16,6 +16,7 @@ namespace Negocio
 
         public List<Usuario> alumnos = new List<Usuario>();
 
+        public Estado_Materia Estado = new Estado_Materia();
 
         public bool Grabar(out string error)
         {
@@ -61,6 +62,39 @@ namespace Negocio
             return materias;
         }
 
+        public static List<Materia> ObtenerDisponibles(int user_id)
+        {
+            List<Materia> materias = new List<Materia>();
+            SqlDataReader dr = Datos.Materias.GetDisponibles(user_id);
+            while (dr.Read())
+            {
+                Materia materia = new Materia();
+                materia.Id = Convert.ToInt32(dr["Materia_id"]);
+                materia.Nombre = dr["nombre"].ToString();
+                materia.CantModulos = Convert.ToInt32(dr["Cant_Modulos"]);
+                materias.Add(materia);
+            }
+
+            return materias;
+        }
+
+        public static List<Materia> ObtenerPorAlumno(int user_id) {
+            List<Materia> materias = new List<Materia>();
+            SqlDataReader dr = Datos.Materias.GetPorAlumno(user_id);
+            while (dr.Read())
+            {
+                Materia materia = new Materia();
+                materia.Id = Convert.ToInt32(dr["Materia_id"]);
+                materia.Nombre = dr["nombre"].ToString();
+                materia.CantModulos = Convert.ToInt32(dr["Cant_Modulos"]);
+                materia.Estado.Estado_Materia_id = Convert.ToInt32(dr["Estado_Materia_Id"]);
+                materia.Estado.Descripcion = dr["Descripcion"].ToString();
+                materias.Add(materia);
+            }
+
+            return materias;
+        }
+
 
         public static Materia Obtener(int id)
         {
@@ -72,7 +106,6 @@ namespace Negocio
                 Materia.Id = Convert.ToInt32(dr["Materia_id"]);
                 Materia.Nombre = dr["nombre"].ToString();
                 Materia.CantModulos = Convert.ToInt32(dr["Cant_Modulos"]);
-
             }
 
             if(Materia.Id != null)
@@ -89,6 +122,7 @@ namespace Negocio
                     alumno.Phone = data["phone"].ToString();
                     alumno.Email = data["mail"].ToString();
                     alumno.Rol = data["Rol_Descripcion"].ToString();
+                    alumno.Estado_materia = data["Estado_Materia"].ToString();
                     if(data["Nota_valor"] != DBNull.Value)
                     {
                         alumno.Nota = Convert.ToInt32(data["Nota_Valor"]);

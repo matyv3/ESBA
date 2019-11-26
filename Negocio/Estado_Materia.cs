@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
-    class Estado_Materia
+    public class Estado_Materia
     {
 
         public int? Estado_Materia_id { get; set; }

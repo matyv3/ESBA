@@ -8,6 +8,9 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Materias</h4>
+                <div class="alert alert-success" id="toast" style="display:none;" role="alert">
+                    Inscripcion realizada!
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -48,7 +51,8 @@
                                         <td>@materia.Nombre</td>
                                         <td>@materia.CantModulos</td>
                                         <td>
-                                            @* link para anotarse *@
+                                            <button class="btn btn-info" id="inscribirse" type="button" data-materia="@materia.Id">Inscribirse</button>
+                                            <span class="badge badge-success id-@materia.Id" style="display:none;">Inscripto</span>
                                         </td>
                                     </tr>
                                 }
@@ -63,3 +67,18 @@
     </div>
 </div>
 
+<script>
+    $(document).on("click", "#inscribirse", function () {
+        var materia_id = $(this).data("materia")
+        var $this = $(this);
+        $.post("@Url.Action("Inscribirse","Panel")", { materia_id }, function (res) {
+            console.log(res)
+            $('#toast').fadeIn();
+            $this.hide();
+            $('.badge-success.id-' + materia_id).show();
+            setTimeout(function () {
+                $('#toast').fadeOut();
+            }, 3000)
+        })
+    })
+</script>

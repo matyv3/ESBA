@@ -212,8 +212,40 @@ namespace Datos
 
         }
 
+        public static SqlDataReader GetDisponibles(int user_id)
+        {
+            SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_GetAll_Materias_Disponibles", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@user_id", user_id);
+                return cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+                cn.Close();
+            }
+        }
 
-
-
+        public static SqlDataReader GetPorAlumno(int user_id)
+        {
+            SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("sp_GetAll_Materias_Alumno", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@user_id", user_id);
+                return cmd.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+                cn.Close();
+            }
+        }
     }
 }

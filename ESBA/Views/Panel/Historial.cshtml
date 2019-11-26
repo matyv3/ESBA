@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Negocio.Materia>
 @{
     ViewBag.Title = "Historial";
 }
@@ -14,15 +14,18 @@
                     <table class="table">
                         <thead class="text-primary">
                         <th>Nombre</th>
-                        <th>Profesor</th>
+                        <th>Cant. Módulos</th>
                         <th>Estado</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Programación 3</td>
-                                <td>Nacho</td>
-                                <td>en veremos</td>
-                            </tr>
+                            @foreach (var materia in Model)
+                            {
+                                <tr>
+                                    <td>@materia.Nombre</td>
+                                    <td>@materia.CantModulos</td>
+                                    <td>@materia.Estado.Descripcion</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

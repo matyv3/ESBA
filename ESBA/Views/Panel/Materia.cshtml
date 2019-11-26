@@ -22,6 +22,7 @@
                             <th>DNI</th>
                             <th>Teléfono</th>
                             <th>Dirección</th>
+                            <th>Estado</th>
                             <th>Nota</th>
                             <th></th>
                             <tbody>
@@ -36,14 +37,17 @@
 
                                     @if (ViewBag.Rol != "profesor")
                                     {
+                                        <td>@user.Estado_materia</td>
                                         <td style="white-space:nowrap;width:100px;">
                                             @user.Nota
                                         </td>
                                         <td></td>
-
                                     }
                                     else
                                     {
+                                        <td>
+                                            @*@Html.DropDownList("estado_materia", (IEnumerable<SelectListItem>)ViewBag.Estados, new { @class = "form-control" })*@
+                                        </td>
                                         <td style="white-space:nowrap;width:100px;">
                                             <input type="number" name="nota" min="0" max="10" value="@user.Nota" class="form-control nota user-@user.user_id" />
                                         </td>
@@ -56,7 +60,7 @@
                                             </button>
                                         </td>
                                     }
-                                    </tr>
+                                </tr>
                                 }
                             </tbody>
                         </table>

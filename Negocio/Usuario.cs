@@ -35,7 +35,7 @@ namespace Negocio
         public string PasswordConfirm { get; set; }
         public string Rol { get; set; }
         public int rol_id { get; set; }
-
+        public string Estado_materia { get; set; }
         public int? Nota { get; set; }
         #endregion
 
