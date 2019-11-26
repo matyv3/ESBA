@@ -18,6 +18,8 @@ namespace Negocio
 
         public Estado_Materia Estado = new Estado_Materia();
 
+        public bool Asignada = false;
+
         public bool Grabar(out string error)
         {
             error = "";

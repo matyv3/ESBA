@@ -119,8 +119,17 @@ namespace ESBA.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            List<Materia> materias = Materia.ObtenerPorUsuario(Convert.ToInt32(user_id));
-            return View(materias);
+            Usuario user = Usuario.Obtener(user_id);
+            ViewBag.Nombre = user.name + " " + user.surname;
+            ViewBag.user_id = user.user_id;
+            List<Materia> actuales = Materia.ObtenerPorUsuario(Convert.ToInt32(user_id));
+            List<Materia> todas = Materia.ObtenerTodas();
+            foreach(var materia in todas)
+            {
+                materia.Asignada = actuales.Contains(materia);
+            }
+
+            return View(todas);
         }
 
         public ActionResult CrearMateria()
