@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
-    class Rol
+    public class Rol
     {
         public int? rol_id { get; set; }
         public String descripcion { get; set; }

@@ -22,7 +22,7 @@
             </div>
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower().StartsWith("materias") ? "active" : "")">
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString().ToLower().StartsWith("materias") || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "crearmateria" ? "active" : "")">
                         <a href="~/panel/materias">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             <p>Materias</p>

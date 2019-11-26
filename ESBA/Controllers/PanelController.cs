@@ -139,8 +139,48 @@ namespace ESBA.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
+            ViewBag.Rol = user.Rol;
             List<Usuario> estudiantes = Usuario.ObtenerUsuarios_Por_Rol(1);
+            if (TempData["error"] != null)
+            {
+                ViewBag.error = TempData["error"].ToString();
+            }
+            if (TempData["success"] != null)
+            {
+                ViewBag.success = TempData["success"].ToString();
+            }
             return View(estudiantes);
+        }
+
+        public ActionResult CrearUsuario(string rol_id) 
+        {
+            Usuario admin = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
+            if (admin.Rol != "administrativo")
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            Rol rol = Rol.Obtener(Convert.ToInt32(rol_id));
+            Usuario user = new Usuario();
+            user.rol_id = Convert.ToInt32(rol.rol_id);
+            user.Rol = rol.descripcion;
+            user.Password = "12345678";
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult GrabarUsuario(Usuario usuario)
+        {
+            string action = usuario.Rol == "alumno" ? "Estudiantes" : "Profesores";
+            if (usuario.Grabar(out string error))
+            {
+                TempData["success"] = "Usuario guardado, se le envió por mail la contraseña: " + usuario.Password;
+                return RedirectToAction(action, "Panel");
+            }
+            else
+            {
+                TempData["error"] = "Error al grabar: " + error;
+                return RedirectToAction(action, "Panel");
+            }            
         }
 
         public ActionResult Profesores()
@@ -150,7 +190,16 @@ namespace ESBA.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
+            ViewBag.Rol = user.Rol;
             List<Usuario> profesores = Usuario.ObtenerUsuarios_Por_Rol(2);
+            if (TempData["error"] != null)
+            {
+                ViewBag.error = TempData["error"].ToString();
+            }
+            if (TempData["success"] != null)
+            {
+                ViewBag.success = TempData["success"].ToString();
+            }
             return View(profesores);
         }
 
