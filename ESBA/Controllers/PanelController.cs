@@ -73,22 +73,37 @@ namespace ESBA.Controllers
             ViewBag.rol = user.Rol;
             if (id != null)
             {
-                //List<Estado_Materia> estados = Estado_Materia.ObtenerTodas();
-
+                List<Estado_Materia> estados = Estado_Materia.ObtenerTodas();
+                List<SelectListItem> selectEstados = new List<SelectListItem>();
+                foreach(var estado in estados)
+                {
+                    selectEstados.Add(new SelectListItem()
+                    {
+                        Text = estado.Descripcion,
+                        Value = estado.Estado_Materia_id.ToString()
+                    });
+                }
+                ViewBag.Estados = selectEstados;
                 Materia materia = Materia.Obtener(Convert.ToInt32(id));
                 return View("Materia", materia);
             }
             else
             {
-                // si es alumno mostrar todas a las que se puede anotar
                 if(user.Rol == "alumno")
                 {
+                    // si es alumno mostrar todas a las que se puede anotar
                     List<Materia> materias = Materia.ObtenerDisponibles(Convert.ToInt32(user.user_id));
+                    return View(materias);
+                }
+                else if(user.Rol == "profesor")
+                {
+                    // si es profe mostrar solo las que da el
+                    List<Materia> materias = Materia.ObtenerPorUsuario(Convert.ToInt32(user.user_id));
                     return View(materias);
                 }
                 else
                 {
-                    // si es profe mostrar solo las que da el
+                    // el adminstrativo ve todas
                     List<Materia> materias = Materia.ObtenerTodas();
                     return View(materias);
                 }
@@ -141,15 +156,19 @@ namespace ESBA.Controllers
 
         public ActionResult Historial()
         {
-            List<Materia> materias = Materia.ObtenerPorAlumno(Convert.ToInt32(Session["user_id"]));
+            List<Materia> materias = Materia.ObtenerPorUsuario(Convert.ToInt32(Session["user_id"]));
             return View(materias);
         }
 
         [HttpPost]
-        public JsonResult Nota(int materia_id, int user_id, int nota)
+        public JsonResult Nota(int materia_id, int user_id, int nota, int? estado_materia)
         {
             Usuario_Materia um = Usuario_Materia.Obtener_por_user_y_materia(user_id, materia_id);
             um.Nota_Valor = nota;
+            if (estado_materia.HasValue)
+            {
+                um.Estado_Materia_id = Convert.ToInt32(estado_materia);
+            }
             um.Grabar(out string error);
 
             if (!string.IsNullOrEmpty(error))

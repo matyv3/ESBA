@@ -46,7 +46,8 @@
                                     else
                                     {
                                         <td>
-                                            @*@Html.DropDownList("estado_materia", (IEnumerable<SelectListItem>)ViewBag.Estados, new { @class = "form-control" })*@
+                                            <span class="estado-user-@user.user_id">@user.Estado_materia | <a href="javascript:void(0)" class="set-estado" data-user="@user.user_id">Editar</a></span>
+                                            @Html.DropDownList("estado_materia", (IEnumerable<SelectListItem>)ViewBag.Estados, new { @class = "form-control estado user-"+@user.user_id, style = "display: none;" })
                                         </td>
                                         <td style="white-space:nowrap;width:100px;">
                                             <input type="number" name="nota" min="0" max="10" value="@user.Nota" class="form-control nota user-@user.user_id" />
@@ -71,12 +72,23 @@
     </div>
 
     <script>
+        $(document).on('click', '.set-estado', function () {
+            var user_id = $(this).data('user')
+            $('span.estado-user-' + user_id).hide();
+            $('.estado.user-' + user_id).show();
+        })
+
         $(document).on('click', 'button.set-nota', function () {
             var user_id = $(this).data('user')
             var materia_id = $(this).data('materia')
             var nota = $('.nota.user-' + user_id).val()
+            var estado = $('.estado.user-' + user_id)
+            var estado_materia = null
+            if (estado.is(':visible')){
+                estado_materia = estado.val();
+            }
 
-            $.post("@Url.Action("Nota","Panel")", { user_id, nota, materia_id }, function (res) {
+            $.post("@Url.Action("Nota","Panel")", { user_id, nota, materia_id, estado_materia }, function (res) {
                 console.log(res)
                 $('#toast').fadeIn();
                 setTimeout(function () {

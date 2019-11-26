@@ -78,17 +78,20 @@ namespace Negocio
             return materias;
         }
 
-        public static List<Materia> ObtenerPorAlumno(int user_id) {
+        public static List<Materia> ObtenerPorUsuario(int user_id) {
             List<Materia> materias = new List<Materia>();
-            SqlDataReader dr = Datos.Materias.GetPorAlumno(user_id);
+            SqlDataReader dr = Datos.Materias.GetPorUsuario(user_id);
             while (dr.Read())
             {
                 Materia materia = new Materia();
                 materia.Id = Convert.ToInt32(dr["Materia_id"]);
                 materia.Nombre = dr["nombre"].ToString();
                 materia.CantModulos = Convert.ToInt32(dr["Cant_Modulos"]);
-                materia.Estado.Estado_Materia_id = Convert.ToInt32(dr["Estado_Materia_Id"]);
-                materia.Estado.Descripcion = dr["Descripcion"].ToString();
+                if(dr["Estado_Materia_Id"] != DBNull.Value)
+                {
+                    materia.Estado.Estado_Materia_id = Convert.ToInt32(dr["Estado_Materia_Id"]);
+                    materia.Estado.Descripcion = dr["Descripcion"].ToString();
+                }
                 materias.Add(materia);
             }
 

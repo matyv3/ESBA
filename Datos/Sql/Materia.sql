@@ -285,7 +285,7 @@ begin
 	
 	select m.*, em.* from Materias m
 	inner join Usuario_Materia um on um.materia_id = m.Materia_id
-	inner join Estado_Materia em on em.Estado_Materia_id = um.Estado_Materia_id
+	left join Estado_Materia em on em.Estado_Materia_id = um.Estado_Materia_id
 	where um.user_id = @user_id
 	
 end

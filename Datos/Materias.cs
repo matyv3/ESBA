@@ -230,7 +230,7 @@ namespace Datos
             }
         }
 
-        public static SqlDataReader GetPorAlumno(int user_id)
+        public static SqlDataReader GetPorUsuario(int user_id)
         {
             SqlConnection cn = new SqlConnection("server= . ; database = ESBA_WEB ; integrated security = true");
             try
