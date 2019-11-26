@@ -47,6 +47,7 @@
                         <th>DNI</th>
                         <th>Teléfono</th>
                         <th>Dirección</th>
+                        <th>Opciones</th>
                         </thead>
                         <tbody>
                             @foreach (var profe in Model)
@@ -57,6 +58,9 @@
                                     <td>@profe.document</td>
                                     <td>@profe.Phone</td>
                                     <td>@profe.Address</td>
+                                    <td>
+                                        <a href="@Url.Action("MateriasProfesor","Panel", new { user_id = profe.user_id })" class="btn btn-info">Ver Materias</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>

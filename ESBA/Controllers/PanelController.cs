@@ -112,6 +112,17 @@ namespace ESBA.Controllers
 
         }
 
+        public ActionResult MateriasProfesor(int user_id)
+        {
+            Usuario admin = Usuario.Obtener(Convert.ToInt32(Session["user_id"]));
+            if (admin.Rol != "administrativo")
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            List<Materia> materias = Materia.ObtenerPorUsuario(Convert.ToInt32(user_id));
+            return View(materias);
+        }
+
         public ActionResult CrearMateria()
         {
             return View();
