@@ -126,7 +126,8 @@ namespace ESBA.Controllers
             List<Materia> todas = Materia.ObtenerTodas();
             foreach(var materia in todas)
             {
-                materia.Asignada = actuales.Contains(materia);
+                int i = actuales.FindIndex(m => m.Id == materia.Id);
+                materia.Asignada = i >= 0;
             }
 
             return View(todas);
@@ -259,6 +260,30 @@ namespace ESBA.Controllers
             if (!string.IsNullOrEmpty(error))
             {
                 return Json(error);
+            }
+            return Json("success");
+        }
+
+        [HttpPost]
+        public JsonResult AsignarMateria(int materia_id, int profe_id, bool asignar)
+        {
+            if (asignar)
+            {
+                Usuario_Materia um = new Usuario_Materia();
+                um.materia_id = materia_id;
+                um.user_id = profe_id;
+                um.Grabar(out string error);
+                if (!string.IsNullOrEmpty(error))
+                {
+                    return Json(error);
+                }
+            }
+            else
+            {
+                Usuario_Materia um = Usuario_Materia.Obtener_por_user_y_materia(profe_id, materia_id);
+                if (um.Usuario_Materia_id.HasValue) { 
+                    um.Eliminar(Convert.ToInt32(um.Usuario_Materia_id));
+                }
             }
             return Json("success");
         }

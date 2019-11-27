@@ -36,14 +36,13 @@
                                             <label class="form-check-label">
                                                 @if (materia.Asignada)
                                                 {
-                                                    <input class="form-check-input" type="checkbox" checked>
+                                                    <input class="form-check-input check" data-id="@materia.Id" type="checkbox" checked>
                                                 }
                                                 else
                                                 {
-                                                    <input class="form-check-input" type="checkbox">
+                                                    <input class="form-check-input check" data-id="@materia.Id" type="checkbox">
                                                 }
-                                                <span class="form-check-sign"></span>
-                                                
+                                                <span class="form-check-sign"></span>                                                
                                             </label>
                                         </div>
                                     </td>
@@ -57,4 +56,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).on('change', '.check', function () {
+        var materia_id = $(this).data('id')
+        var asignar = $(this).is(':checked')
+        $.post("@Url.Action("AsignarMateria","Panel")", { materia_id, profe_id: @ViewBag.user_id, asignar }, function (res) {
+            console.log(res)
+        })
+    })
+</script>
 

@@ -68,8 +68,8 @@ return
 create procedure sp_Insert_Usuario_Materia
 @user_id int,
 @materia_id int,
-@Estado_Materia_id int,
-@Nota_Valor int,
+@Estado_Materia_id int = null,
+@Nota_Valor int = null,
 @mensaje int output
 
 as

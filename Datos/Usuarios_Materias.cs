@@ -20,7 +20,7 @@ namespace Datos
         /// <param name="materia_name"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve ID de Nota insertada o 0 en caso de error </returns>
-        public static int Insert_Usuario_Materia(int user_id, int materia_id, int Estado_Materia_id,int Nota_Valor)
+        public static int Insert_Usuario_Materia(int user_id, int materia_id, int? Estado_Materia_id, int? Nota_Valor)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Datos
         /// <param name="nombre"></param>
         /// <param name="cant_modulos"></param>
         /// <returns> Devuelve 1 si fue exitoso o 0 en caso de error </returns>
-        public static int Update_Usuario_Materia(int Usuario_Materia_id, int user_id, int materia_id, int Estado_Materia_id, int Nota_Valor)
+        public static int Update_Usuario_Materia(int Usuario_Materia_id, int user_id, int materia_id, int? Estado_Materia_id, int? Nota_Valor)
         {
             try
             {
