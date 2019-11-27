@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Negocio.Materia>
+@{
+    ViewBag.Title = "Materias";
+}
+    <div class="wrapper">
+        <div class="page-header page-header-small">
+            <div class="page-header-image" data-parallax="true" style="background-image: url('../../Content/images/bg.jpg');">
+            </div>
+            <div class="content-center">
+                <div class="container">
+                    <h1 class="title">ESBA</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team text-center container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Materias</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Cant. Módulos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var materia in Model)
+                                    {
+                                        <tr>
+                                            <td>@materia.Nombre</td>
+                                            <td>@materia.CantModulos</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <footer class="footer footer-default">
+            <div class=" container ">
+                Av. Monroe 5048. Barrio de Villa Urquiza. Ciudad Autonoma de Buenos Aires.
+                Republica Argentina.
+                Tel: 4521-3500 / 4522-4935 / 4523-2452 / 4514-8601
+            </div>
+        </footer>

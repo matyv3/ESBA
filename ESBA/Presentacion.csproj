@@ -208,6 +208,7 @@
     <Content Include="Views\Panel\Materia.cshtml" />
     <Content Include="Views\Panel\CrearUsuario.cshtml" />
     <Content Include="Views\Panel\MateriasProfesor.cshtml" />
+    <Content Include="Views\Home\Materias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

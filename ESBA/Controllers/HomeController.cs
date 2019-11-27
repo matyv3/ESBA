@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Negocio;
 
 namespace ESBA.Controllers
 {
@@ -20,11 +21,10 @@ namespace ESBA.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Materias()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            List<Materia> materias = Materia.ObtenerTodas();
+            return View(materias);
         }
     }
 }
